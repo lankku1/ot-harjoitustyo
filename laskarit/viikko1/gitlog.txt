@@ -95,3 +95,5 @@ Date:   Wed Mar 13 12:45:07 2019 +0200
  tiedosto.txt | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
 Anna-MacBook-Air:tiedostoja lankku$ 
+
+moi
