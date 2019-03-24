@@ -1,6 +1,6 @@
 # Vaatimusmäärittely
 
-##Sovelluksen tarkoitus
+## Sovelluksen tarkoitus
 
 Ideana sovellukselleni olisi tehdä kalenterivarausjärjestelmä sukuni mökille. Sovelluksen 
 avulla käyttäjät pystyvät varaamaan mökin itselleen tietyksi ajankohdaksi niin, että se 
@@ -12,7 +12,7 @@ omista varauksista sekä näkymä kalenteriin, missä on tiedot muiden varauksis
 vielä hahmotelma käyttöliittymästä.
 
 ## Käyttäjät
-Sovelluksella on useampi *normaali* käyttäjä sekä yksi *pääkäyttäjä*, jolla on oikeudet.
+Sovelluksella on useampi *normaali käyttäjä* sekä yksi *pääkäyttäjä*, jolla on oikeudet.
 Haluaisin ainakin tällä hektellä pääkäyttäjälle oikeudet poistaa ja muuttaa muiden varauksia, 
 mikäli tämä on mahdollista.
 
