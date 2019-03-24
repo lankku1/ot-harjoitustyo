@@ -1,5 +1,7 @@
 # Vaatimusmäärittely
+
 ##Sovelluksen tarkoitus
+
 Ideana sovellukselleni olisi tehdä kalenterivarausjärjestelmä sukuni mökille. Sovelluksen 
 avulla käyttäjät pystyvät varaamaan mökin itselleen tietyksi ajankohdaksi niin, että se 
 tulee myös muille näkyväksi, eikä muiden ole mahdollista varata päällekkäin toista mökkivuoroa
