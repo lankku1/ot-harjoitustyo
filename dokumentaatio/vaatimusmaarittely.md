@@ -19,7 +19,7 @@ mikäli tämä on mahdollista.
 ## Käyttöliittymäluonnos
 Sovellus koostuu kuudesta eri näkymästä.
 
-
+<img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/k_1.png" width="750">
 
 Sovellus aukeaa kirjautumisnäkymään, josta on mahdollista siirtyä luomaan uusi käyttäjä.
 Kirjautumisen jälkeen siirrytään käyttäjän etusivulle, josta on mahdollista siirtyä tarkastelemaan
