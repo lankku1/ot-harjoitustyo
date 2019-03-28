@@ -5,3 +5,12 @@
 [osa2 tehtävät](https://github.com/lankku1/ot-harjoitustyo/tree/master/laskarit/viikko2)
 
 [vaatimusmäärittely](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+
+### Viikko3
+
+
+
+### Työaikakirjanpito
+
+[Työaikakirjanpito](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+
