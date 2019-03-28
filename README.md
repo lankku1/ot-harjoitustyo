@@ -1,8 +1,5 @@
 # Ohjelmistotekniikka harjoitustyö
 ## Tehtävät
-### Viikko 2
-
-[vaatimusmäärittely](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 ### Viikko3
 
