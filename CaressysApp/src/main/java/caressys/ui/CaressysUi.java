@@ -93,9 +93,12 @@ public class CaressysUi extends Application {
             if (username.length() == 2 || name.length() < 3) {
                 userCreationMessage.setText("Username or name too short!");
                 userCreationMessage.setTextFill(Color.RED);
-            } //else if (caressysService.createUser(username, name)) {
+            }//else if (caressysService.createUser(username, name)) {
                 
             //}
+            else {
+                System.out.println("new user created");
+            }
         });
         newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, characterInfo, createNewUserButton);
         newUserScene = new Scene(newUserPane, 300, 250);
