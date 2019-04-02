@@ -2,6 +2,7 @@
 package caressys.ui;
 
 
+import caressys.domain.User;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;

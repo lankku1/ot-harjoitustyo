@@ -5,7 +5,7 @@ public class User {
     private String name;
     private String username;
     
-    public User(String name, String username) {
+    public User(String username, String name) {
         this.name = name;
         this.username = username;
     }
@@ -26,5 +26,9 @@ public class User {
         
         User other = (User) obj;
         return username.equals(other.username);
+    }
+    
+    public String toString() {
+        return "name: " + this.name + ", username: " + this.username;
     }
 }
