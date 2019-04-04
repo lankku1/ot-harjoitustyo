@@ -25,16 +25,24 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <excludes>
+                        <exclude>caressys/ui/*</exclude>
+                    </excludes>
                 </configuration>
                 <version>2.5</version>
             </plugin>
+<!--            <configuration>
+                <excludes>
+                    <exclude>caressys/ui/*</exclude>
+                </excludes>
+            </configuration>   -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -49,6 +57,7 @@
                 </executions>
             </plugin>  
         </plugins>
-
     </build>
+    
+    
 </project>
