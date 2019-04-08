@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package caressys.domain;
 
+import caressys.dao.UserDao;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,34 +9,59 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author lankku
- */
 public class CaressysServiceUserTest {
     
-    public CaressysServiceUserTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    FakeUserDao userDao;
+    caressysService service;
     
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        userDao = new FakeUserDao();
+        service = new caressysService(userDao);
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+     @Test
+     public void hello() {}
+     
+    @Test
+    public void nonexistentUserIsNotLoggedIn() {
+        boolean status = service.login("notauser");
+        assertFalse(status);
+        
+        assertEquals(null, service.getLoggedInUser());
+    }
+    
+    @Test
+    public void existingUserIsLoggedIn() {
+        boolean status = service.login("muumi");
+        assertTrue(status);
+        
+        User logged = service.getLoggedInUser();
+        assertEquals("Maija Meikäläinen", logged.getName());
+    }
+    
+    @Test
+    public void loggedInUserLogsOut() {
+        service.login("muumi");
+        service.logout();
+        assertEquals(null, service.getLoggedInUser());
+    }
+    
+    @Test
+    public void newUserCreatedSuccesfullyAndCanLogIn() throws Exception {
+        boolean result = service.createUser("flamingo", "Pete");
+        assertTrue(result);
+        
+        boolean loginStatus = service.login("flamingo");
+        assertTrue(loginStatus);
+        
+        User logged = service.getLoggedInUser();
+        assertEquals("Pete", logged.getName());
+    }
+    
+    @Test
+    public void createNewUserWithTakenUsername() throws Exception {
+        boolean result = service.createUser("muumi", "Matti Meikäläinen");
+        assertFalse(result);
+    }
 }
