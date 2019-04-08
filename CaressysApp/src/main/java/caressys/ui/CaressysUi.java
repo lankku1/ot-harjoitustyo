@@ -31,6 +31,7 @@ public class CaressysUi extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // this is where the app starts
+        
         // set the login scene
         VBox loginPane = new VBox(10);
         loginPane.setPadding(new Insets(10));
