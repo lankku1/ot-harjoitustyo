@@ -1,5 +1,6 @@
 package caressys.ui;
 
+import caressys.dao.FileUserDao;
 import caressys.domain.User;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -14,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import caressys.domain.caressysService;
+import java.io.FileInputStream;
+import java.util.Properties;
 import javafx.geometry.Pos;
 
 public class CaressysUi extends Application {
@@ -26,7 +29,20 @@ public class CaressysUi extends Application {
     private Scene calendarScene; // for the calendar view
     private Scene newReservationScene; // for creating a new reservation
 
+    private caressysService service;
     private Label menuLabel = new Label();
+    
+     @Override
+    public void init() throws Exception {
+        Properties properties = new Properties();
+
+        properties.load(new FileInputStream("config.properties"));
+        
+        String userFile = properties.getProperty("userFile");
+            
+        FileUserDao userDao = new FileUserDao(userFile);
+        service = new caressysService(userDao);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -51,6 +67,15 @@ public class CaressysUi extends Application {
             String username = inputUsername.getText();
             System.out.println(username);
             // let's add the functionality later for login button
+            menuLabel.setText(username);
+            if (service.login(username)) {
+                loginMessage.setText("");
+                primaryStage.setScene(userScene);
+                inputUsername.setText("");
+            } else {
+                loginMessage.setText("user does not exist");
+                loginMessage.setTextFill(Color.RED);
+            }
         });
 
         // set this action, when pressing the "create new user"-button
@@ -59,7 +84,7 @@ public class CaressysUi extends Application {
             primaryStage.setScene(newUserScene);
         });
 
-        loginPane.getChildren().addAll(loginButton, createButton, loginMessage);
+        loginPane.getChildren().addAll(loginMessage, loginButton, createButton);
 
         loginScene = new Scene(loginPane, 300, 250);
 
@@ -95,10 +120,14 @@ public class CaressysUi extends Application {
             if (username.length() == 2 || name.length() < 3) {
                 userCreationMessage.setText("Username or name too short!");
                 userCreationMessage.setTextFill(Color.RED);
-            }//else if (caressysService.createUser(username, name)) {
-            //}
-            else {
-                System.out.println("new user created");
+            }else if (service.createUser(username, name)) {
+                userCreationMessage.setText("");
+                loginMessage.setText("new user created");
+                loginMessage.setTextFill(Color.GREEN);
+                primaryStage.setScene(loginScene);
+            } else { // createUser method returns false
+                userCreationMessage.setText("Username has to be unique"); 
+                userCreationMessage.setTextFill(Color.RED);
             }
         });
         newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, characterInfo, createNewUserButton);
