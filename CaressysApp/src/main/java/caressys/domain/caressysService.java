@@ -33,6 +33,14 @@ public class caressysService {
     }
     
     /*
+    returns the user that is logged in.
+    */
+    
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
+    
+    /*
     for creating a new user. 
     The method will return true, if a new user has been created
     succesfully, otherwise it will return false (for example, if
