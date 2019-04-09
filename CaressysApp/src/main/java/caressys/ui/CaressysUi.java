@@ -164,6 +164,8 @@ public class CaressysUi extends Application {
         userPane.setLeft(leftSidePane);
         userScene = new Scene(userPane, 300, 250);
         
+        
+        
 
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
