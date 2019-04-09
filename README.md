@@ -10,3 +10,5 @@ Sovelluksella on siis useampi rekisteröitynyt käyttäjä. Jokaisella käyttäj
 
 [Työaikakirjanpito](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
+[Arkkitehtuuri](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
