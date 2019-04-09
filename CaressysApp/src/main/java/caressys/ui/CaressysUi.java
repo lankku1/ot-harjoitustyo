@@ -15,9 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import caressys.domain.caressysService;
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 import javafx.geometry.Pos;
+import javafx.scene.layout.BorderPane;
 
 public class CaressysUi extends Application {
 
@@ -36,7 +38,8 @@ public class CaressysUi extends Application {
     public void init() throws Exception {
         Properties properties = new Properties();
 
-        properties.load(new FileInputStream("config.properties"));
+        File configProperties = new File("config.properties");
+        properties.load(new FileInputStream(configProperties));
         
         String userFile = properties.getProperty("userFile");
             
@@ -132,6 +135,35 @@ public class CaressysUi extends Application {
         });
         newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, characterInfo, createNewUserButton);
         newUserScene = new Scene(newUserPane, 300, 250);
+        
+        // set the user scene
+        BorderPane userPane = new BorderPane();
+        userPane.setPadding(new Insets(10));
+        VBox leftSidePane = new VBox(10);
+        leftSidePane.setPadding(new Insets(10));
+        
+        Button signOutButton = new Button("Sign out");
+        Button reservationsButton = new Button("My reservations");
+        Button calendarButton = new Button("Calendar");
+        
+        
+        signOutButton.setOnAction((event) -> {
+            loginMessage.setText("Signed out succesfully");
+            loginMessage.setTextFill(Color.GREEN);
+            primaryStage.setScene(loginScene);
+        });
+        reservationsButton.setOnAction((event) -> {
+            primaryStage.setScene(reservationScene);
+        });
+        calendarButton.setOnAction((event) -> {
+            primaryStage.setScene(calendarScene);
+        });
+        
+        leftSidePane.getChildren().addAll(menuLabel, reservationsButton, calendarButton);
+        userPane.setRight(signOutButton);
+        userPane.setLeft(leftSidePane);
+        userScene = new Scene(userPane, 300, 250);
+        
 
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
