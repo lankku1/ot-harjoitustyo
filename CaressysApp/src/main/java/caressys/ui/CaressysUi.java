@@ -14,11 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import caressys.domain.caressysService;
+import caressys.domain.CaressysService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 import javafx.geometry.Pos;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.BorderPane;
 
 public class CaressysUi extends Application {
@@ -31,7 +32,7 @@ public class CaressysUi extends Application {
     private Scene calendarScene; // for the calendar view
     private Scene newReservationScene; // for creating a new reservation
 
-    private caressysService service;
+    private CaressysService service;
     private Label menuLabel = new Label();
     
      @Override
@@ -44,7 +45,7 @@ public class CaressysUi extends Application {
         String userFile = properties.getProperty("userFile");
             
         FileUserDao userDao = new FileUserDao(userFile);
-        service = new caressysService(userDao);
+        service = new CaressysService(userDao);
     }
 
     @Override
@@ -164,14 +165,19 @@ public class CaressysUi extends Application {
         userPane.setLeft(leftSidePane);
         userScene = new Scene(userPane, 300, 250);
         
-        
-        
+        // set calendar scene
+        VBox calendarPane = new VBox(10);
+        calendarPane.setPadding(new Insets(10));
+        DatePicker insertStartDate = new DatePicker();
+        calendarPane.getChildren().add(insertStartDate);
+        calendarScene = new Scene(calendarPane, 300, 250);
 
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
         primaryStage.show();
 
     }
+    
 
     public static void main(String[] args) {
         launch(CaressysUi.class);
