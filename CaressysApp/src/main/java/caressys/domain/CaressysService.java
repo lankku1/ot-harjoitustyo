@@ -3,11 +3,11 @@ package caressys.domain;
 
 import caressys.dao.UserDao;
 
-public class caressysService {
+public class CaressysService {
     private UserDao userDao;
     private User loggedInUser;
     
-    public caressysService(UserDao userDao) {
+    public CaressysService(UserDao userDao) {
         this.userDao = userDao;
     }
     
