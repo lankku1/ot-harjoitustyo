@@ -1,10 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package caressys.domain;
 
+import java.time.LocalDate;
+import java.time.Month;
+import static java.util.Calendar.MONTH;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,34 +11,39 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author lankku
- */
 public class CaresTest {
     
-    public CaresTest() {
-    }
+//    @Before
+//    public void setUp() {
+//        LocalDate arrival = LocalDate.of(2019, Month.APRIL, 19);
+//        LocalDate departure = LocalDate.of(2019, Month.APRIL, 23);
+//    }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+     @Test
+     public void hello() {}
+     
+     @Test
+     public void equalWhenSameId() {
+         
+         Cares reservation1 = new Cares(1, null, null, null);
+         Cares reservation2 = new Cares(1, null, null, null);
+         
+         assertTrue(reservation1.equals(reservation2));
+     }
+     
+     @Test
+     public void notEqualWhenDifferentId() {
+         Cares reservation1 = new Cares(1, null, null, null);
+         Cares reservation2 = new Cares(2, null, null, null);
+         
+         assertFalse(reservation1.equals(reservation2));
+     }
+     
+     @Test
+     public void nonEqualDifferentType() {
+         Cares reservation = new Cares(1, null, null, null);
+         Object o = new Object();
+         
+         assertFalse(reservation.equals(o));
+     }
 }
