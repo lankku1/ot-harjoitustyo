@@ -1,7 +1,7 @@
 
 package caressys.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /*
 For a single reservation
@@ -9,11 +9,11 @@ For a single reservation
 
 public class Cares { // Calendar Reservation
     private int id;
-    private Date arrivalDate;
-    private Date departureDate;
+    private LocalDate arrivalDate;
+    private LocalDate departureDate;
     private User user;
     
-    public Cares(int id, Date arrival, Date departure, User user) {
+    public Cares(int id, LocalDate arrival, LocalDate departure, User user) {
         this.id = id;
         this.arrivalDate = arrival;
         this.departureDate = departure;
@@ -24,11 +24,11 @@ public class Cares { // Calendar Reservation
         this.id = id;
     }
     
-    public Date getArrival() {
+    public LocalDate getArrival() {
         return this.arrivalDate;
     }
     
-    public Date getDeparture() {
+    public LocalDate getDeparture() {
         return this.departureDate;
     }
     
