@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import caressys.domain.CaressysService;
 import java.io.File;
 import java.io.FileInputStream;
+import java.time.LocalDate;
 import java.util.Properties;
 import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
@@ -62,15 +63,12 @@ public class CaressysUi extends Application {
         Label loginMessage = new Label(); // if the username input doesn't exist yet
 
         // let's create the buttons
-        Button loginButton = new Button("Log In");
+        Button loginButton = new Button("Log in");
         Button createButton = new Button("Create new user");
         
+        // set this action, when pressing the "Log in"-button
         loginButton.setOnAction((event) -> {
-            
-            System.out.println("Trying to login");
             String username = inputUsername.getText();
-            System.out.println(username);
-            // let's add the functionality later for login button
             menuLabel.setText(username);
             if (service.login(username)) {
                 loginMessage.setText("");
@@ -169,6 +167,11 @@ public class CaressysUi extends Application {
         VBox calendarPane = new VBox(10);
         calendarPane.setPadding(new Insets(10));
         DatePicker insertStartDate = new DatePicker();
+        
+        // customizing the date picker
+        insertStartDate.setValue(LocalDate.now());
+        insertStartDate.setShowWeekNumbers(true);
+        
         calendarPane.getChildren().add(insertStartDate);
         calendarScene = new Scene(calendarPane, 300, 250);
 
