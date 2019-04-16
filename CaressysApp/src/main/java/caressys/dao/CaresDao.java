@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface CaresDao {
     
-    Cares create(Cares res) throws Exception;
+    Cares create(Cares reservation) throws Exception;
 
     List<Cares> getAll();
     
-    LocalDate findByDate(LocalDate date);
+    LocalDate findByArrivalDate(LocalDate date);
+    
+    LocalDate findByDepartureDate(LocalDate date);
 }
