@@ -12,11 +12,13 @@ import static org.junit.Assert.*;
 public class CaressysServiceUserTest {
     
     FakeUserDao userDao;
+    
     CaressysService service;
+    
     
     @Before
     public void setUp() {
-        userDao = new FakeUserDao();
+        userDao = new FakeUserDao(); 
         service = new CaressysService(userDao);
     }
 
