@@ -4,7 +4,7 @@ Sovellus toimii kalenterivarausjärjestelmänä sukuni mökille. Sovelluksen avu
 
 Sovelluksella on siis useampi rekisteröitynyt käyttäjä. Jokaisella käyttäjällä on näkyvillä lista omista varauksista sekä näkymä kalenteriin, missä on tiedot muiden varauksista. 
 
-### Dokumentaatio
+## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
@@ -12,6 +12,8 @@ Sovelluksella on siis useampi rekisteröitynyt käyttäjä. Jokaisella käyttäj
 
 [Arkkitehtuuri](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+## Releaset
+[Viikko 5](https://github.com/lankku1/ot-harjoitustyo/releases/tag/Viikko5)
 
 ## Komentorivitoiminnot
 
