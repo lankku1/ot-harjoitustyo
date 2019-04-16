@@ -171,11 +171,17 @@ public class CaressysUi extends Application {
         calendarPane.setPadding(new Insets(10));
         DatePicker insertStartDate = new DatePicker();
         
+        Button createReservation = new Button("New reservation");
+        createReservation.setOnAction((event) -> {
+            primaryStage.setScene(newReservationScene);
+        });
+        
+        /*
         // customizing the date picker
         insertStartDate.setValue(LocalDate.now());
         insertStartDate.setShowWeekNumbers(true);
-        
-        calendarPane.getChildren().add(insertStartDate);
+        */
+        calendarPane.getChildren().add(createReservation);
         calendarScene = new Scene(calendarPane, 300, 250);
 
         primaryStage.setScene(loginScene);
