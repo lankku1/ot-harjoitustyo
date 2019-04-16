@@ -168,22 +168,84 @@ public class CaressysUi extends Application {
         userScene = new Scene(userPane, 300, 250);
         
         // set calendar scene
-        VBox calendarPane = new VBox(10);
+        BorderPane calendarPane = new BorderPane();
         calendarPane.setPadding(new Insets(10));
-        DatePicker insertStartDate = new DatePicker();
         
-        Button createReservation = new Button("New reservation");
-        createReservation.setOnAction((event) -> {
+        
+        Button createReservationButton = new Button("New reservation");
+        Button returnUserSceneButton1 = new Button("Return");
+        createReservationButton.setOnAction((event) -> {
             primaryStage.setScene(newReservationScene);
         });
+        returnUserSceneButton1.setOnAction((event) -> {
+            primaryStage.setScene(userScene);
+        });
+        
         
         /*
         // customizing the date picker
+        DatePicker insertStartDate = new DatePicker();
         insertStartDate.setValue(LocalDate.now());
         insertStartDate.setShowWeekNumbers(true);
         */
-        calendarPane.getChildren().add(createReservation);
+        calendarPane.setRight(returnUserSceneButton1);
+        calendarPane.setLeft(createReservationButton);
         calendarScene = new Scene(calendarPane, 300, 250);
+        
+        
+        // set the reservation scene
+        BorderPane reservationPane = new BorderPane();
+        reservationPane.setPadding(new Insets(10));
+        
+        Button returnUserSceneButton2 = new Button("Return");
+        
+        returnUserSceneButton2.setOnAction((event) -> {
+            primaryStage.setScene(userScene);
+        });
+        reservationPane.setRight(returnUserSceneButton2);
+        reservationScene = new Scene(reservationPane, 300, 250);
+        
+        // set the create a new reservation scene
+        BorderPane newReservationPane = new BorderPane();
+        newReservationPane.setPadding(new Insets(10));
+        
+        VBox createReservationPane = new VBox(10);
+        createReservationPane.setPadding(new Insets(10));
+        
+        HBox arrivalPane = new HBox(10);
+        arrivalPane.setPadding(new Insets(10));
+        
+        Label arrivalLabel = new Label("Arrival: ");
+        DatePicker insertArrivalDate = new DatePicker();
+        insertArrivalDate.setValue(LocalDate.now());
+        insertArrivalDate.setShowWeekNumbers(true);
+        arrivalPane.getChildren().addAll(arrivalLabel, insertArrivalDate);
+        
+        HBox departurePane = new HBox(10);
+        departurePane.setPadding(new Insets(10));
+        
+        Label departureLabel = new Label("Departure: ");
+        DatePicker insertDepartureDate = new DatePicker();
+        insertDepartureDate.setValue(LocalDate.now());
+        insertDepartureDate.setShowWeekNumbers(true);
+        departurePane.getChildren().addAll(departureLabel, insertDepartureDate);
+        
+        Button newReservationButton = new Button("Create new reservation"); // add the functionality later
+        Label createReservationInfo = new Label(); // if the reservation isn't available
+        createReservationPane.getChildren().addAll(arrivalPane, departurePane, newReservationButton, createReservationInfo);
+        
+        Button returnToCalendarButton = new Button("Return");
+        returnToCalendarButton.setPadding(new Insets(10));
+        
+        returnToCalendarButton.setOnAction((event) -> {
+            primaryStage.setScene(calendarScene);
+        });
+        
+        newReservationPane.setRight(returnToCalendarButton);
+        newReservationPane.setCenter(createReservationPane);
+        
+        newReservationScene = new Scene(newReservationPane, 300, 250);
+        
 
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
