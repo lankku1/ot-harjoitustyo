@@ -2,6 +2,8 @@
 package caressys.domain;
 
 import caressys.dao.UserDao;
+import caressys.dao.UserDao;
+import caressys.domain.User;
 import java.util.ArrayList;
 import java.util.List;
 
