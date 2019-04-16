@@ -1,5 +1,6 @@
 package caressys.ui;
 
+import caressys.dao.FileCaresDao;
 import caressys.dao.FileUserDao;
 import caressys.domain.User;
 import javafx.application.Application;
@@ -44,9 +45,11 @@ public class CaressysUi extends Application {
         properties.load(new FileInputStream(configProperties));
         
         String userFile = properties.getProperty("userFile");
+        String resFile = properties.getProperty("resFile"); //file for reservations
             
         FileUserDao userDao = new FileUserDao(userFile);
-        service = new CaressysService(userDao);
+        FileCaresDao caresDao = new FileCaresDao(resFile, userDao);
+        service = new CaressysService(userDao, caresDao);
     }
 
     @Override
