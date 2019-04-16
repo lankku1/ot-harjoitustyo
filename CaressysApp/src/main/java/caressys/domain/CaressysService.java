@@ -26,7 +26,9 @@ public class CaressysService {
     */
     public boolean login(String username) {
         User user = userDao.findByUsername(username);
-        if (user == null) return false;
+        if (user == null) {
+            return false;
+        }
         loggedInUser = user;
         return true;
     }
@@ -55,12 +57,14 @@ public class CaressysService {
     creating a new user.
     */
     public boolean createUser(String username, String name) {
-        if (userDao.findByUsername(username) != null) return false;
+        if (userDao.findByUsername(username) != null) {
+            return false;
+        }
         
         User user = new User(username, name);
         try {
             userDao.create(user);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -79,7 +83,7 @@ public class CaressysService {
         Cares reservation = new Cares(0, arrival, departure, loggedInUser);
         try {
             caresDao.create(reservation);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
         return true;

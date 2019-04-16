@@ -37,7 +37,7 @@ public class CaressysUi extends Application {
     private CaressysService service;
     private Label menuLabel = new Label();
     
-     @Override
+    @Override
     public void init() throws Exception {
         Properties properties = new Properties();
 
@@ -45,7 +45,8 @@ public class CaressysUi extends Application {
         properties.load(new FileInputStream(configProperties));
         
         String userFile = properties.getProperty("userFile");
-        String resFile = properties.getProperty("resFile"); //file for reservations
+        String resFile = properties.getProperty("resFile"); 
+        //file for reservations
             
         FileUserDao userDao = new FileUserDao(userFile);
         FileCaresDao caresDao = new FileCaresDao(resFile, userDao);
@@ -125,7 +126,7 @@ public class CaressysUi extends Application {
             if (username.length() == 2 || name.length() < 3) {
                 userCreationMessage.setText("Username or name too short!");
                 userCreationMessage.setTextFill(Color.RED);
-            }else if (service.createUser(username, name)) {
+            } else if (service.createUser(username, name)) {
                 userCreationMessage.setText("");
                 loginMessage.setText("new user created");
                 loginMessage.setTextFill(Color.GREEN);
