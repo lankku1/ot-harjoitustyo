@@ -31,7 +31,7 @@ public class FileUserDao implements UserDao {
         }
     }
     
-    private void save() throws Exception{
+    private void save() throws Exception {
         //save the user by using a filewriter object
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (User user : users) {
