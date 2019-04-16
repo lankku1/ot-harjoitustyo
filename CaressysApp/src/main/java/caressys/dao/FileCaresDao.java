@@ -15,7 +15,7 @@ public class FileCaresDao implements CaresDao {
     private List<Cares> reservations;
     private String file; // file consists of all the reservations created
     
-    public FileCaresDao(String file, UserDao users)throws Exception {
+    public FileCaresDao(String file, UserDao users) throws Exception {
         reservations = new ArrayList<>();
         this.file = file;
         try {
@@ -72,7 +72,12 @@ public class FileCaresDao implements CaresDao {
 
     @Override
     public LocalDate findByDepartureDate(LocalDate date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return reservations.stream()
+                .filter(r -> r.getDeparture()
+                .equals(date))
+                .findFirst()
+                .orElse(null)
+                .getDeparture();
     }
     
 }
