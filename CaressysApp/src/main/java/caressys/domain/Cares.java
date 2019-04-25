@@ -1,6 +1,7 @@
 
 package caressys.domain;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 /*
@@ -38,6 +39,11 @@ public class Cares { // Calendar Reservation
 
     public int getId() {
         return id;
+    }
+    
+    public Duration getDuration() {
+        Duration duration = Duration.between(arrivalDate, departureDate);
+        return duration;
     }
     
     @Override
