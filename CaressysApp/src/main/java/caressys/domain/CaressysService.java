@@ -79,6 +79,9 @@ public class CaressysService {
     public boolean createReservation(LocalDate arrival, LocalDate departure) {
         // needs a function for checking if there is a reservation 
         // made during the timeline given !!
+        if (caresDao.findByArrivalDate(arrival) != null | caresDao.findByDepartureDate(departure) != null) {
+            return false;
+        }
         
         Cares reservation = new Cares(0, arrival, departure, loggedInUser);
         try {
@@ -90,7 +93,7 @@ public class CaressysService {
     }
     
     /*
-    used for listing all the reservation for a specific user
+    used for listing all the reservation made (for a specific user)
     */
     
     public List<Cares> listAllReservations() {
@@ -100,7 +103,8 @@ public class CaressysService {
         
         return caresDao.getAll()
                 .stream()
-                .filter(t -> t.getUser().equals(loggedInUser))
+                .filter(t -> t.getDeparture().isAfter(LocalDate.now())) // filtering all the previous reservations that aren't relevant anymore
+                //.filter(t -> t.getUser().equals(loggedInUser)) not relevant anymore
                 .collect(Collectors.toList());
     }
     
