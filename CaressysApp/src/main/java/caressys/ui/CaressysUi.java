@@ -30,8 +30,6 @@ public class CaressysUi extends Application {
     private Scene loginScene; // for login
     private Scene newUserScene; // for creating a new user
     private Scene userScene; // the first scene after logging in
-    private Scene reservationScene; // layout for all the users reservations
-    private Scene calendarScene; // for the calendar view
     private Scene newReservationScene; // for creating a new reservation
 
     private CaressysService service;
@@ -146,64 +144,23 @@ public class CaressysUi extends Application {
         leftSidePane.setPadding(new Insets(10));
         
         Button signOutButton = new Button("Sign out");
-        Button reservationsButton = new Button("My reservations");
-        Button calendarButton = new Button("Calendar");
+        Button createReservationButton = new Button("New reservation");
         
+        createReservationButton.setOnAction((event) -> {
+            primaryStage.setScene(newReservationScene);
+        });
         
         signOutButton.setOnAction((event) -> {
             loginMessage.setText("Signed out succesfully");
             loginMessage.setTextFill(Color.GREEN);
             primaryStage.setScene(loginScene);
         });
-        reservationsButton.setOnAction((event) -> {
-            primaryStage.setScene(reservationScene);
-        });
-        calendarButton.setOnAction((event) -> {
-            primaryStage.setScene(calendarScene);
-        });
         
-        leftSidePane.getChildren().addAll(menuLabel, reservationsButton, calendarButton);
+        leftSidePane.getChildren().addAll(menuLabel, createReservationButton);
         userPane.setRight(signOutButton);
         userPane.setLeft(leftSidePane);
         userScene = new Scene(userPane, 300, 250);
         
-        // set calendar scene
-        BorderPane calendarPane = new BorderPane();
-        calendarPane.setPadding(new Insets(10));
-        
-        
-        Button createReservationButton = new Button("New reservation");
-        Button returnUserSceneButton1 = new Button("Return");
-        createReservationButton.setOnAction((event) -> {
-            primaryStage.setScene(newReservationScene);
-        });
-        returnUserSceneButton1.setOnAction((event) -> {
-            primaryStage.setScene(userScene);
-        });
-        
-        
-        /*
-        // customizing the date picker
-        DatePicker insertStartDate = new DatePicker();
-        insertStartDate.setValue(LocalDate.now());
-        insertStartDate.setShowWeekNumbers(true);
-        */
-        calendarPane.setRight(returnUserSceneButton1);
-        calendarPane.setLeft(createReservationButton);
-        calendarScene = new Scene(calendarPane, 300, 250);
-        
-        
-        // set the reservation scene
-        BorderPane reservationPane = new BorderPane();
-        reservationPane.setPadding(new Insets(10));
-        
-        Button returnUserSceneButton2 = new Button("Return");
-        
-        returnUserSceneButton2.setOnAction((event) -> {
-            primaryStage.setScene(userScene);
-        });
-        reservationPane.setRight(returnUserSceneButton2);
-        reservationScene = new Scene(reservationPane, 300, 250);
         
         // set the create a new reservation scene
         BorderPane newReservationPane = new BorderPane();
