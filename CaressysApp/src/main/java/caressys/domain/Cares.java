@@ -47,6 +47,11 @@ public class Cares { // Calendar Reservation
     }
     
     @Override
+    public String toString() {
+        return "from: " + arrivalDate + " to: " + departureDate + " duration: " + getDuration() + " username: " + user.getUsername();
+    }
+    
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Cares)) {
             return false;
