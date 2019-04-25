@@ -236,7 +236,6 @@ public class CaressysUi extends Application {
         
         Button returnToCalendarButton = new Button("Return");
         returnToCalendarButton.setPadding(new Insets(10));
-        
         returnToCalendarButton.setOnAction((event) -> {
             primaryStage.setScene(calendarScene);
         });
