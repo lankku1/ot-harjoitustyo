@@ -1,4 +1,3 @@
-
 package caressys.dao;
 
 import caressys.domain.Cares;
@@ -11,10 +10,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileCaresDao implements CaresDao {
+
     // in this class we are able to keep track of all of the reservations made
     private List<Cares> reservations;
     private String file; // file consists of all the reservations created
-    
+
     public FileCaresDao(String file, UserDao users) throws Exception {
         reservations = new ArrayList<>();
         this.file = file;
@@ -23,7 +23,7 @@ public class FileCaresDao implements CaresDao {
             while (reader.hasNextLine()) {
                 String[] parts = reader.nextLine().split(";");
                 int id = Integer.parseInt(parts[0]);
-                User user = users.getAll().stream().filter(u->u.getUsername().equals(parts[3])).findFirst().orElse(null); 
+                User user = users.getAll().stream().filter(u -> u.getUsername().equals(parts[3])).findFirst().orElse(null);
                 LocalDate arrival = LocalDate.parse(parts[1]);
                 LocalDate departure = LocalDate.parse(parts[2]);
                 Cares cares = new Cares(id, arrival, departure, user);
@@ -34,7 +34,7 @@ public class FileCaresDao implements CaresDao {
             writer.close();
         }
     }
-    
+
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Cares reservation : reservations) {
@@ -42,7 +42,7 @@ public class FileCaresDao implements CaresDao {
             }
         }
     }
-    
+
     private int generateId() {
         return reservations.size() + 1;
     }
@@ -53,6 +53,7 @@ public class FileCaresDao implements CaresDao {
         reservations.add(reservation);
         save();
         return reservation;
+
     }
 
     @Override
@@ -79,5 +80,5 @@ public class FileCaresDao implements CaresDao {
                 .orElse(null)
                 .getDeparture();
     }
-    
+
 }
