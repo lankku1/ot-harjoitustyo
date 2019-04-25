@@ -212,7 +212,7 @@ public class CaressysUi extends Application {
         VBox createReservationPane = new VBox(10);
         createReservationPane.setPadding(new Insets(10));
         
-        HBox arrivalPane = new HBox(10);
+        VBox arrivalPane = new VBox(10);
         arrivalPane.setPadding(new Insets(10));
         
         Label arrivalLabel = new Label("Arrival: ");
@@ -221,17 +221,17 @@ public class CaressysUi extends Application {
         insertArrivalDate.setShowWeekNumbers(true);
         arrivalPane.getChildren().addAll(arrivalLabel, insertArrivalDate);
         
-        HBox departurePane = new HBox(10);
+        VBox departurePane = new VBox(10);
         departurePane.setPadding(new Insets(10));
         
         Label departureLabel = new Label("Departure: ");
         DatePicker insertDepartureDate = new DatePicker();
-        insertDepartureDate.setValue(LocalDate.now());
+        insertDepartureDate.setValue(LocalDate.now().plusDays(1));
         insertDepartureDate.setShowWeekNumbers(true);
         departurePane.getChildren().addAll(departureLabel, insertDepartureDate);
         
         Button newReservationButton = new Button("Create new reservation"); // add the functionality later
-        Label createReservationInfo = new Label(); // if the reservation isn't available
+        Label createReservationInfo = new Label(""); // if the reservation isn't available
         createReservationPane.getChildren().addAll(arrivalPane, departurePane, newReservationButton, createReservationInfo);
         
         Button returnToCalendarButton = new Button("Return");
