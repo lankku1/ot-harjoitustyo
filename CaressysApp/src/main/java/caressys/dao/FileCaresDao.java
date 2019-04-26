@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,9 +52,9 @@ public class FileCaresDao implements CaresDao {
     public Cares create(Cares reservation) throws Exception {
         reservation.setId(generateId());
         reservations.add(reservation);
+        System.out.println("lisättiin varaus listalle");
         save();
         return reservation;
-
     }
 
     @Override
@@ -80,5 +81,28 @@ public class FileCaresDao implements CaresDao {
                 .orElse(null)
                 .getDeparture();
     }
+    
+    @Override
+    public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) {
+        
+        if (reservations.isEmpty()) {
+            return true;
+        }
+        
+        for (Cares reservation : reservations) {
+            if (!(from.isAfter(reservation.getDeparture()) || to.isBefore(reservation.getArrival()))) {
+                if (! (from.equals(reservation.getArrival()) || to.equals(reservation.getDeparture()))) {
+                    return true;
+                }
+            }
+        }
+        /*
+        if reservation ends before the existing reservation even starts, 
+        or if reservation starts after the existing reservation ends, then it doesn't conflict with existing reservations
+         -> return true
+        */
+        return false;
+    }
+    
 
 }

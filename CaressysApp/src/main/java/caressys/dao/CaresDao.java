@@ -14,4 +14,6 @@ public interface CaresDao {
     LocalDate findByArrivalDate(LocalDate date);
     
     LocalDate findByDepartureDate(LocalDate date);
+    
+    boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to);
 }
