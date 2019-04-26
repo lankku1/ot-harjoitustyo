@@ -19,6 +19,8 @@ Metodia getReservations() käytetään kaikkien tehtyjen varausten tulostamiseen
 ## Sovelluslogiikka
 Sovelluksen logiikan muodostaa luokat User ja Cares(CalendarReservation), jotka kuvaavat käyttäjiä sekä käyttäjien tekemiä varauksia.
 
+<img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Untitled%20Diagram.png">
+
 CaressysService-luokka muodostaa sovelluksen toiminnan sovelluslogiikan, jossa hyödynnetään caressys.dao pakkauksen luokkia esim. käyttäjän etsimiseen tai luomiseen. Metodeina toimii muun muassa
 - boolean login(String username)
 - boolean createUser(String username, String name)
@@ -29,10 +31,24 @@ CaressysServicen ja ohjelman muiden osien suhdetta kuvaava pakkauskaavio (kaavio
 
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/pakkauskaavioSovelluksesta.png">
 
+## Tietojen pysyväistallennus
+Pakkauksen caressys.dao luokkien _FileUserDao_ ja _FileCaresDao_ tarkoituksena on tallettaa tiedot luotihin tiedostoihin. _FileUserDao_ tallettaa tiedot käyttäjistä _users.txt_ tiedostoon ja _FileCaresDao_ tallettaa tiedot varauksista _reservations.txt_ tiedostoon. Luokat noudattavat Data Access Object -suunnittelumallia ja ne on luoto rajapintojen _UserDao_ ja _CaresDao_ taakse.
+
+## Tiedostot
+Kuten jo teitojen pysyväistallennuksessa avattiin, nii sovellus tallettaa käyttäjän tiedot, sekä käyttäjien luomat varaukset erillisiin tiedostoihin.
+
+Sovelluksen juureen on sijoitettu konfiguraatiotiedosto config.properties, joka määrittelee tiedostojen nimet.
+
 ## Päätoiminnallisuudet
 
-### uuden käyttäjän luominen
+Kuvataan seuraavaksi sovelluksen toimintalogiikaa käyttäen muutaman päätoiminnallisuuden osaa sekvenssikaavion muodossa.
+
+### Uuden käyttäjän luominen
 
 Kun uuden käyttäjän luomisnäkymässä on syötetty käyttäjätunnus joka ei ole jo käytössä sekä nimi ja klikataan painiketta createUser etenee sovelluksen kontrolli seuraavasti:
 
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/newUser.png">
+
+### Käyttäjän sisäänkirjautuminen
+
+### Uuden varauksen luonti
