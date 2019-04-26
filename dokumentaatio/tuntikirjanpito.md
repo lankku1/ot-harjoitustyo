@@ -11,4 +11,6 @@
 | 11.4. |  3  | Varaus-luokka ja tälle omat testinsä, kalenteriformaatin tutkimista javafx:llä, CaresDao-rajapinnan luonti |
 | 15.4. |  2  | Luotiin FileCaresDao-luokka, lisättin tämän luokan ominaisuuksia CaressysService luokkaan. |
 | 16.4. |  4  | Korjattiin checkstyle.xml tiedostoa ja kirjoitusvirheitä. Muokattiin ui näkymää ja testiluokkia edellisen päivän muutosten pohjalta. |
-|yhteensä| 26,5|
+| 25.4 | 4 | Käyttöliittymän muokkaamista, mm. lisättiin toiminnallisuus varausten lisäämiselle käytteäen FileCaresDao-luokkaa. Virheiden korjailuja. DateCell ja DatePicker toiminnallisuuteen tutustumista|
+| 26.4 | 3 | Lisättiin getReservations-metodi käyttöliittymään ja JavaDocin-kuvauksien luonti sovelluksen luokille|
+|yhteensä| 33,5|
