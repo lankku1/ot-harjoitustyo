@@ -97,7 +97,7 @@ public class FileCaresDao implements CaresDao {
         
         for (Cares reservation : reservations) {
             if (!(from.isAfter(reservation.getDeparture()) || to.isBefore(reservation.getArrival()))) {
-                if (! (from.equals(reservation.getArrival()) || to.equals(reservation.getDeparture()))) {
+                if (!(from.equals(reservation.getArrival()) || to.equals(reservation.getDeparture()))) {
                     return true;
                 }
             }
