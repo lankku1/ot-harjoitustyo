@@ -31,8 +31,12 @@ public class FileUserDao implements UserDao {
         }
     }
     
+    /**
+     * save the user by using a filewriter object
+     * @throws Exception 
+     */
     private void save() throws Exception {
-        //save the user by using a filewriter object
+        
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (User user : users) {
                 writer.write(user.getUsername() + ";" + user.getName() + "\n");
@@ -40,15 +44,22 @@ public class FileUserDao implements UserDao {
         } 
     }
     
+    /**
+     * lists all the users that are already in use
+     * @return list of all the users
+     */
     @Override
     public List<User> getAll() {
-        // lists all the users that are already in use
         return users;
     }
     
+    /**
+     * finds a specific user the application has in use
+     * @param username 
+     * @return username that equals with the parameter, if it doesn't exist, return null
+     */
     @Override
     public User findByUsername(String username) {
-        // finds a specific user we have in use
         return users.stream()
             .filter(u->u.getUsername()
             .equals(username))
@@ -56,9 +67,14 @@ public class FileUserDao implements UserDao {
             .orElse(null);
     }
     
+    /**
+     * used for creating a new user
+     * @param user user has been created in the CaresService class
+     * @return the given user
+     * @throws Exception 
+     */
     @Override
     public User create(User user) throws Exception {
-        // used for creating a new user
         users.add(user);
         save();
         return user;

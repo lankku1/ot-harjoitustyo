@@ -18,12 +18,13 @@ public class CaressysService {
         this.caresDao = caresDao;
     }
 
-    /*
-    loggin in by a given username. 
-    Find the parameter username from userDao. If it doesn't
-    exist, return false, otherwise return true (username exists and
-    is able to log in the app).
+    /**
+    * loggin in by a given username.
+    * Find the parameter username from userDao. 
+    * @param username username given by the application user trying to log in
+    * @return If given username doesn't exist, return false, otherwise return true.
      */
+    
     public boolean login(String username) {
         User user = userDao.findByUsername(username);
         if (user == null) {
@@ -33,26 +34,29 @@ public class CaressysService {
         return true;
     }
 
-    /*
-    log out from the app
+    /**
+    * log out from the app
      */
+    
     public void logout() {
         loggedInUser = null;
     }
 
-    /*
-    returns the user that is logged in.
+    /**
+     * @return the user is logged in and using the application.
      */
+    
     public User getLoggedInUser() {
         return loggedInUser;
     }
 
-    /*
-    for creating a new user. 
-    The method will return true, if a new user has been created
-    succesfully, otherwise it will return false (for example, if
-    the username is already taken or there is an exception while 
-    creating a new user.
+    /**
+    * for creating a new user. 
+    * @param username user has given out the parameter for username 
+    * @param name user has given out the parameter for name
+    * @return true, if a new user has been created succesfully, otherwise it will return false (for example, if
+    * the username is already taken or there is an exception while 
+    * creating a new user.
      */
     public boolean createUser(String username, String name) {
         if (userDao.findByUsername(username) != null) {
@@ -68,9 +72,12 @@ public class CaressysService {
         return true;
     }
 
-    /*
-    for creating a new reservation. Returns true if the reservation was
-    created succesfully, otherwise it will return false (i.e., if the reservation overlaps an existing reservation).
+    /**
+     * for creating a new reservation. 
+     * @param arrival the user will pick a certain date for arrival of the reservation
+     * @param departure the user will pick a certain date for departure of the reservation
+     * @return true if the reservation has been created succesfully, otherwise it will return false (i.e., if the reservation overlaps an existing reservation).
+     * 
      */
     public boolean createReservation(LocalDate arrival, LocalDate departure) {
         /*
@@ -92,9 +99,11 @@ public class CaressysService {
         return true;
     }
 
-    /*
-    used for listing all the reservation made (for a specific user)
+    /**
+     * used for listing all the reservation made (for a specific user)
+     * @return a list that contains all the existing reservations made
      */
+    
     public List<Cares> listAllReservations() {
         
         if (loggedInUser == null) {

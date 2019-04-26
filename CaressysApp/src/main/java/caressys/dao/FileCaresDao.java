@@ -35,7 +35,8 @@ public class FileCaresDao implements CaresDao {
             writer.close();
         }
     }
-
+    
+    
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Cares reservation : reservations) {
@@ -47,7 +48,12 @@ public class FileCaresDao implements CaresDao {
     private int generateId() {
         return reservations.size() + 1;
     }
-
+    /**
+     * create a new calendar reservation and adding it to the
+     * reservations list and saving it to the file that consists of all the reservations created
+     * @param reservation given reservation that consist the information of the user and dates for arrival and departure
+     * @return reservation, with the right id that is generated at the start of the method
+    */
     @Override
     public Cares create(Cares reservation) throws Exception {
         reservation.setId(generateId());

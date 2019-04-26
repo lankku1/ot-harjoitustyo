@@ -5,6 +5,11 @@ public class User {
     private String name;
     private String username;
     
+    /**
+     * This class has the given information about a single user
+     * @param username
+     * @param name 
+     */
     public User(String username, String name) {
         this.name = name;
         this.username = username;

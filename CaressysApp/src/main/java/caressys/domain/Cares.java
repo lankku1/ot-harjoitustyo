@@ -14,6 +14,13 @@ public class Cares { // Calendar Reservation
     private LocalDate departureDate;
     private User user;
     
+    /**
+     * Class for a single calendar reservation that has been made.
+     * @param id used to personalise the reservation
+     * @param arrival 
+     * @param departure
+     * @param user 
+     */
     public Cares(int id, LocalDate arrival, LocalDate departure, User user) {
         this.id = id;
         this.arrivalDate = arrival;

@@ -233,9 +233,12 @@ public class CaressysUi extends Application {
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
         primaryStage.show();
-
     }
-
+    
+    /**
+     * lists all the reservations to reservations pane that all of the users have made.
+     * Method 
+     */
     public void getReservations() {
         reservations.getChildren().clear();
         List<Cares> reservationlist = service.listAllReservations();
