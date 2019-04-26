@@ -2,6 +2,7 @@ package caressys.ui;
 
 import caressys.dao.FileCaresDao;
 import caressys.dao.FileUserDao;
+import caressys.domain.Cares;
 import caressys.domain.User;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -21,8 +22,12 @@ import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.util.Properties;
 import javafx.geometry.Pos;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
+import java.util.*;
 
 public class CaressysUi extends Application {
 
@@ -34,6 +39,9 @@ public class CaressysUi extends Application {
 
     private CaressysService service;
     private Label menuLabel = new Label();
+    private VBox reservations = new VBox(10);
+
+    ;
     
     @Override
     public void init() throws Exception {
@@ -41,20 +49,22 @@ public class CaressysUi extends Application {
 
         File configProperties = new File("config.properties");
         properties.load(new FileInputStream(configProperties));
-        
+
         String userFile = properties.getProperty("userFile");
-        String resFile = properties.getProperty("resFile"); 
+        String resFile = properties.getProperty("resFile");
         //file for reservations
-            
+
         FileUserDao userDao = new FileUserDao(userFile);
         FileCaresDao caresDao = new FileCaresDao(resFile, userDao);
         service = new CaressysService(userDao, caresDao);
+        //reservations = new VBox(10);
+        //reservations.setPadding(new Insets(10));
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         // this is where the app starts
-        
+
         // set the login scene
         VBox loginPane = new VBox(10);
         loginPane.setPadding(new Insets(10));
@@ -67,17 +77,18 @@ public class CaressysUi extends Application {
         // let's create the buttons
         Button loginButton = new Button("Log in");
         Button createButton = new Button("Create new user");
-        
+
         // set this action, when pressing the "Log in"-button
         loginButton.setOnAction((event) -> {
             String username = inputUsername.getText();
-            menuLabel.setText(username);
+            menuLabel.setText("Welcome to CaressysApp " + username + "!");
             if (service.login(username)) {
+                getReservations();
                 loginMessage.setText("");
                 primaryStage.setScene(userScene);
                 inputUsername.setText("");
             } else {
-                loginMessage.setText("user does not exist");
+                loginMessage.setText("User does not exist");
                 loginMessage.setTextFill(Color.RED);
             }
         });
@@ -92,7 +103,7 @@ public class CaressysUi extends Application {
 
         loginScene = new Scene(loginPane, 300, 250);
 
-        // set the create newUserScene
+        // set the createNewUserScene
         VBox newUserPane = new VBox(10);
         newUserPane.setPadding(new Insets(10));
 
@@ -108,7 +119,7 @@ public class CaressysUi extends Application {
         TextField newNameInput = new TextField();
         newNamePane.getChildren().addAll(newNameLabel, newNameInput);
 
-        Label characterInfo = new Label("minimum 3 characters");
+        Label characterInfo = new Label("Minimum 3 characters");
         characterInfo.setPadding(new Insets(10));
 
         Label userCreationMessage = new Label();
@@ -126,89 +137,140 @@ public class CaressysUi extends Application {
                 userCreationMessage.setTextFill(Color.RED);
             } else if (service.createUser(username, name)) {
                 userCreationMessage.setText("");
-                loginMessage.setText("new user created");
+                loginMessage.setText("New user created");
                 loginMessage.setTextFill(Color.GREEN);
                 primaryStage.setScene(loginScene);
             } else { // createUser method returns false
-                userCreationMessage.setText("Username has to be unique"); 
+                userCreationMessage.setText("Username has to be unique");
                 userCreationMessage.setTextFill(Color.RED);
             }
         });
         newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, characterInfo, createNewUserButton);
         newUserScene = new Scene(newUserPane, 300, 250);
-        
-        // set the user scene
+
+        // set the user scene when the user has succesfully logged in
         BorderPane userPane = new BorderPane();
         userPane.setPadding(new Insets(10));
         VBox leftSidePane = new VBox(10);
         leftSidePane.setPadding(new Insets(10));
-        
+
         Button signOutButton = new Button("Sign out");
         Button createReservationButton = new Button("New reservation");
-        
+
         createReservationButton.setOnAction((event) -> {
             primaryStage.setScene(newReservationScene);
         });
-        
+
         signOutButton.setOnAction((event) -> {
             loginMessage.setText("Signed out succesfully");
             loginMessage.setTextFill(Color.GREEN);
+            reservations.getChildren().clear();
             primaryStage.setScene(loginScene);
         });
-        
-        leftSidePane.getChildren().addAll(menuLabel, createReservationButton);
+
+        leftSidePane.getChildren().addAll(menuLabel, reservations, createReservationButton);
         userPane.setRight(signOutButton);
         userPane.setLeft(leftSidePane);
-        userScene = new Scene(userPane, 300, 250);
-        
-        
+        userScene = new Scene(userPane, 500, 300);
+
         // set the create a new reservation scene
         BorderPane newReservationPane = new BorderPane();
         newReservationPane.setPadding(new Insets(10));
-        
+
         VBox createReservationPane = new VBox(10);
         createReservationPane.setPadding(new Insets(10));
-        
+
         VBox arrivalPane = new VBox(10);
         arrivalPane.setPadding(new Insets(10));
-        
+
         Label arrivalLabel = new Label("Arrival: ");
         DatePicker insertArrivalDate = new DatePicker();
         insertArrivalDate.setValue(LocalDate.now());
         insertArrivalDate.setShowWeekNumbers(true);
         arrivalPane.getChildren().addAll(arrivalLabel, insertArrivalDate);
-        
+
         VBox departurePane = new VBox(10);
         departurePane.setPadding(new Insets(10));
-        
+
         Label departureLabel = new Label("Departure: ");
         DatePicker insertDepartureDate = new DatePicker();
         insertDepartureDate.setValue(LocalDate.now().plusDays(1));
         insertDepartureDate.setShowWeekNumbers(true);
         departurePane.getChildren().addAll(departureLabel, insertDepartureDate);
-        
+
         Button newReservationButton = new Button("Create new reservation"); // add the functionality later
-        Label createReservationInfo = new Label(""); // if the reservation isn't available
+        Label createReservationInfo = new Label(); // if the reservation isn't available
         createReservationPane.getChildren().addAll(arrivalPane, departurePane, newReservationButton, createReservationInfo);
-        
-        Button returnToCalendarButton = new Button("Return");
-        returnToCalendarButton.setPadding(new Insets(10));
-        returnToCalendarButton.setOnAction((event) -> {
-            primaryStage.setScene(calendarScene);
+        newReservationButton.setPadding(new Insets(5));
+
+        newReservationButton.setOnAction((event) -> {
+            LocalDate arrival = insertArrivalDate.getValue();
+            LocalDate departure = insertDepartureDate.getValue();
+
+            if (!service.createReservation(arrival, departure)) {
+                createReservationInfo.setText("Reservation overlaps with an \n existing reservation");
+                createReservationInfo.setTextFill(Color.RED);
+            } else {
+
+                createReservationInfo.setText("");
+                menuLabel.setText("New reservation created succesfully");
+                menuLabel.setTextFill(Color.GREEN);
+                primaryStage.setScene(userScene);
+            }
         });
-        
+
+        Button returnToCalendarButton = new Button("Return");
+        returnToCalendarButton.setPadding(new Insets(5));
+        returnToCalendarButton.setOnAction((event) -> {
+            primaryStage.setScene(userScene);
+        });
+
         newReservationPane.setRight(returnToCalendarButton);
         newReservationPane.setCenter(createReservationPane);
-        
-        newReservationScene = new Scene(newReservationPane, 300, 250);
-        
+
+        newReservationScene = new Scene(newReservationPane, 300, 280);
 
         primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
         primaryStage.show();
 
     }
-    
+
+    public void getReservations() {
+        reservations.getChildren().clear();
+        List<Cares> reservationlist = service.listAllReservations();
+
+        if (!reservationlist.isEmpty()) {
+            reservationlist.forEach((res) -> {
+                reservations.getChildren().add(new Label(res.toString()));
+            });
+        }
+
+    }
+
+    public void setDatePickerView(DatePicker datePicker) {
+        final Callback<DatePicker, DateCell> dayCellFactory
+                = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item.isBefore(
+                                datePicker.getValue().plusDays(1))) {
+                            setDisable(true);
+
+                            setTooltip(new Tooltip(service.getLoggedInUser().getUsername()));
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        datePicker.setDayCellFactory(dayCellFactory);
+    }
 
     public static void main(String[] args) {
         launch(CaressysUi.class);
