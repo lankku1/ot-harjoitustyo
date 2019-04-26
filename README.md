@@ -55,3 +55,13 @@ Tiedostoon [checkstyle.xml](https://github.com/mluukkai/OtmTodoApp/blob/master/c
 
 Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
 
+### JavaDoc
+
+JavaDoc generoidaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia voi tarkastella avaamalla selaimella tiedosto _target/site/apidocs/index.html_
+
