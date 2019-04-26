@@ -40,8 +40,6 @@ public class CaressysUi extends Application {
     private CaressysService service;
     private Label menuLabel = new Label();
     private VBox reservations = new VBox(10);
-
-    ;
     
     @Override
     public void init() throws Exception {
@@ -57,8 +55,6 @@ public class CaressysUi extends Application {
         FileUserDao userDao = new FileUserDao(userFile);
         FileCaresDao caresDao = new FileCaresDao(resFile, userDao);
         service = new CaressysService(userDao, caresDao);
-        //reservations = new VBox(10);
-        //reservations.setPadding(new Insets(10));
     }
 
     @Override
@@ -250,21 +246,20 @@ public class CaressysUi extends Application {
         }
 
     }
-
+    
+    /*
+    keskeneräinen! lisätäänkö sovelluslogiikkaan vai pidetäänkö täällä?
     public void setDatePickerView(DatePicker datePicker) {
-        final Callback<DatePicker, DateCell> dayCellFactory
-                = new Callback<DatePicker, DateCell>() {
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
                 return new DateCell() {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-
                         if (item.isBefore(
                                 datePicker.getValue().plusDays(1))) {
                             setDisable(true);
-
                             setTooltip(new Tooltip(service.getLoggedInUser().getUsername()));
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
@@ -274,6 +269,7 @@ public class CaressysUi extends Application {
         };
         datePicker.setDayCellFactory(dayCellFactory);
     }
+    */
 
     public static void main(String[] args) {
         launch(CaressysUi.class);
