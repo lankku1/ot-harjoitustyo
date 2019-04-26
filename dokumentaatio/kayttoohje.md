@@ -20,7 +20,7 @@ Kun käyttäjä on päässyt kirjautumaan sisään, käyttäjälle on näkyviss�
 vaatii vielä korjaamista). Käyttäjä voi halutessaan päästä uuden varauksen luomisnäkymään painamalla _New reservation_ painiketta.
 Tällöin siirrytään uuden varauksen luomisnäkymään
 
-<img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/createNewUserScene.png">
+<img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/createNewReservationScene.png">
 
 Nyt valitaan kalenterista haluttu ajankohta ja painetaan painiketta _Create new reservation_. Tämän jälkeen
 sovellus siirtyy takaisin käyttäjänäkymään ja tehty varaus tulisi näkyä tässä näkymässä. Uloskirjautuminen onnistuu painamalla _sign out_ painiketta.
