@@ -1,2 +1,3 @@
 anlaine;Anna
 testaaja;Maija
+Mansikka;Maisa
