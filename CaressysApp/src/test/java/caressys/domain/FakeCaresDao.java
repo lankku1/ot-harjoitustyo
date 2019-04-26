@@ -42,5 +42,19 @@ public class FakeCaresDao implements CaresDao {
                 .getDeparture();
     }
 
-    
+    @Override
+    public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) {
+        if (reservations.isEmpty()) {
+            return true;
+        }
+        
+        for (Cares reservation : reservations) {
+            if (!(from.isAfter(reservation.getDeparture()) || to.isBefore(reservation.getArrival()))) {
+                if (! (from.equals(reservation.getArrival()) || to.equals(reservation.getDeparture()))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
