@@ -41,16 +41,6 @@ public class Cares { // Calendar Reservation
         return id;
     }
     
-    public Duration getDuration() {
-        Duration duration = Duration.between(arrivalDate, departureDate);
-        return duration;
-    }
-    
-    @Override
-    public String toString() {
-        return "from: " + arrivalDate + " to: " + departureDate + " duration: " + getDuration() + " username: " + user.getUsername();
-    }
-    
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Cares)) {
@@ -58,5 +48,10 @@ public class Cares { // Calendar Reservation
         }
         Cares other = (Cares) obj;
         return id == other.id;
+    }
+    
+    @Override
+    public String toString() {
+        return "from: " + arrivalDate + " to: " + departureDate  + " username: " + user.getUsername();
     }
 }
