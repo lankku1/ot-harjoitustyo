@@ -12,6 +12,8 @@ Sovelluksella on siis useampi rekisteröitynyt käyttäjä. Jokaisella käyttäj
 
 [Arkkitehtuuri](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 ## Releaset
 [Viikko 5](https://github.com/lankku1/ot-harjoitustyo/releases/tag/Viikko5)
 
