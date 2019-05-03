@@ -23,23 +23,12 @@ public class FakeCaresDao implements CaresDao {
     }
 
     @Override
-    public LocalDate findByArrivalDate(LocalDate date) {
+    public Cares findByArrivalDate(LocalDate date) {
         return reservations.stream()
                 .filter(r -> r.getArrival()
                 .equals(date))
                 .findFirst()
-                .orElse(null)
-                .getArrival();
-    }
-
-    @Override
-    public LocalDate findByDepartureDate(LocalDate date) {
-        return reservations.stream()
-                .filter(r -> r.getDeparture()
-                .equals(date))
-                .findFirst()
-                .orElse(null)
-                .getDeparture();
+                .orElse(null);
     }
 
     @Override
