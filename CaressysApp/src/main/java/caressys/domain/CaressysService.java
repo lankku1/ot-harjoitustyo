@@ -98,6 +98,8 @@ public class CaressysService {
         }
         return true;
     }
+    
+    
 
     /**
      * used for listing all the reservation made (for a specific user)
@@ -115,5 +117,14 @@ public class CaressysService {
                 //.filter(t -> t.getArrival().isAfter(LocalDate.now())) // filtering all the previous reservations that aren't relevant anymore
                 //.filter(t -> t.getUser().equals(loggedInUser)) not relevant anymore
                 .collect(Collectors.toList());
+    }
+    
+    /**
+     * finds a specific reservation using the caresDao method findByArrivalDate
+     * @param arrival arrivaldate for the specific reservation
+     * @return a specific reservation found by the given date, if there doesn't exist a reservation for the given date, return null
+     */
+    public Cares getReservation(LocalDate arrival) {
+        return caresDao.findByArrivalDate(arrival);
     }
 }
