@@ -98,6 +98,7 @@ public class CaressysUi extends Application {
         loginPane.getChildren().addAll(loginMessage, loginButton, createButton);
 
         loginScene = new Scene(loginPane, 300, 250);
+        primaryStage.setScene(loginScene);
 
         // set the createNewUserScene
         VBox newUserPane = new VBox(10);
@@ -136,6 +137,8 @@ public class CaressysUi extends Application {
                 loginMessage.setText("New user created");
                 loginMessage.setTextFill(Color.GREEN);
                 primaryStage.setScene(loginScene);
+                newNameInput.clear();
+                newUsernameInput.clear();
             } else { // createUser method returns false
                 userCreationMessage.setText("Username has to be unique");
                 userCreationMessage.setTextFill(Color.RED);
@@ -181,6 +184,7 @@ public class CaressysUi extends Application {
 
         Label arrivalLabel = new Label("Arrival: ");
         DatePicker insertArrivalDate = new DatePicker();
+        insertArrivalDate.setEditable(false); // Date can only be picked by using the calendar
         insertArrivalDate.setValue(LocalDate.now());
         insertArrivalDate.setShowWeekNumbers(true);
         arrivalPane.getChildren().addAll(arrivalLabel, insertArrivalDate);
@@ -190,11 +194,12 @@ public class CaressysUi extends Application {
 
         Label departureLabel = new Label("Departure: ");
         DatePicker insertDepartureDate = new DatePicker();
+        insertDepartureDate.setEditable(false); // Date can only be picked by using the calendar
         insertDepartureDate.setValue(LocalDate.now().plusDays(1));
         insertDepartureDate.setShowWeekNumbers(true);
         departurePane.getChildren().addAll(departureLabel, insertDepartureDate);
 
-        Button newReservationButton = new Button("Create new reservation"); // add the functionality later
+        Button newReservationButton = new Button("Create new reservation"); 
         Label createReservationInfo = new Label(); // if the reservation isn't available
         createReservationPane.getChildren().addAll(arrivalPane, departurePane, newReservationButton, createReservationInfo);
         newReservationButton.setPadding(new Insets(5));
@@ -202,15 +207,17 @@ public class CaressysUi extends Application {
         newReservationButton.setOnAction((event) -> {
             LocalDate arrival = insertArrivalDate.getValue();
             LocalDate departure = insertDepartureDate.getValue();
-
-            if (!service.createReservation(arrival, departure)) {
+            if (!(service.createReservation(arrival, departure))) {
                 createReservationInfo.setText("Reservation overlaps with an \n existing reservation");
                 createReservationInfo.setTextFill(Color.RED);
+                Cares res = service.getReservation(arrival);
+                setDatePickerView(insertArrivalDate, res);
+                setDatePickerView(insertDepartureDate, res);
             } else {
-
                 createReservationInfo.setText("");
                 menuLabel.setText("New reservation created succesfully");
                 menuLabel.setTextFill(Color.GREEN);
+                getReservations(); // add the new reservation to the userScene
                 primaryStage.setScene(userScene);
             }
         });
@@ -226,7 +233,6 @@ public class CaressysUi extends Application {
 
         newReservationScene = new Scene(newReservationPane, 300, 280);
 
-        primaryStage.setScene(loginScene);
         primaryStage.setTitle("CaressysApp");
         primaryStage.show();
     }
@@ -247,9 +253,7 @@ public class CaressysUi extends Application {
 
     }
     
-    /*
-    keskeneräinen! lisätäänkö sovelluslogiikkaan vai pidetäänkö täällä?
-    public void setDatePickerView(DatePicker datePicker) {
+    public void setDatePickerView(DatePicker datePicker, Cares res) {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
@@ -257,8 +261,7 @@ public class CaressysUi extends Application {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item.isBefore(
-                                datePicker.getValue().plusDays(1))) {
+                        if (item.isAfter(res.getArrival()) && item.isBefore(res.getDeparture())) {
                             setDisable(true);
                             setTooltip(new Tooltip(service.getLoggedInUser().getUsername()));
                             setStyle("-fx-background-color: #ffc0cb;");
@@ -269,7 +272,6 @@ public class CaressysUi extends Application {
         };
         datePicker.setDayCellFactory(dayCellFactory);
     }
-    */
 
     public static void main(String[] args) {
         launch(CaressysUi.class);
