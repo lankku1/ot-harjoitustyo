@@ -69,25 +69,14 @@ public class FileCaresDao implements CaresDao {
     }
 
     @Override
-    public LocalDate findByArrivalDate(LocalDate date) {
+    public Cares findByArrivalDate(LocalDate date) {
         return reservations.stream()
                 .filter(r -> r.getArrival()
                 .equals(date))
                 .findFirst()
-                .orElse(null)
-                .getArrival();
+                .orElse(null);
     }
 
-    @Override
-    public LocalDate findByDepartureDate(LocalDate date) {
-        return reservations.stream()
-                .filter(r -> r.getDeparture()
-                .equals(date))
-                .findFirst()
-                .orElse(null)
-                .getDeparture();
-    }
-    
     @Override
     public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) {
         
@@ -96,19 +85,23 @@ public class FileCaresDao implements CaresDao {
         }
         
         for (Cares reservation : reservations) {
-            if (!(from.isAfter(reservation.getDeparture()) || to.isBefore(reservation.getArrival()))) {
-                if (!(from.equals(reservation.getArrival()) || to.equals(reservation.getDeparture()))) {
-                    return true;
-                }
+            LocalDate a = reservation.getArrival();
+            LocalDate d = reservation.getDeparture();
+            
+            if (from.equals(a) || to.equals(d)) {
+                return false;
+            } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
+                return false;
+            } else if (from.isBefore(a) && to.isAfter(a)) {
+                return false;
             }
         }
         /*
-        if reservation ends before the existing reservation even starts, 
-        or if reservation starts after the existing reservation ends, then it doesn't conflict with existing reservations
+        if reservation ends before the existing reservation even starts, or if reservation starts after 
+        the existing reservation ends, then it doesn't conflict with existing reservations
          -> return true
         */
-        return false;
+        
+        return true;
     }
-    
-
 }
