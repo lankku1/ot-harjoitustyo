@@ -42,13 +42,13 @@ public class FakeCaresDao implements CaresDao {
             LocalDate d = reservation.getDeparture();
             
             if (from.equals(a) || to.equals(d)) {
-                return false;
+                return true;
             } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
-                return false;
+                return true;
             } else if (from.isBefore(a) && to.isAfter(a)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
