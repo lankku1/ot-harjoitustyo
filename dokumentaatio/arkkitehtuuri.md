@@ -50,5 +50,7 @@ Kun uuden käyttäjän luomisnäkymässä on syötetty käyttäjätunnus joka ei
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/newUser.png">
 
 ### Käyttäjän sisäänkirjautuminen
+<img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/userLogin.png">
 
 ### Uuden varauksen luonti
+<img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/createNewReservation.png">
