@@ -45,7 +45,7 @@ public class FileCaresDao implements CaresDao {
         }
     }
 
-    private int generateId() {
+    private int generateId() throws Exception {
         return reservations.size() + 1;
     }
     /**
@@ -64,12 +64,12 @@ public class FileCaresDao implements CaresDao {
     }
 
     @Override
-    public List<Cares> getAll() {
+    public List<Cares> getAll() throws Exception {
         return reservations;
     }
 
     @Override
-    public Cares findByArrivalDate(LocalDate date) {
+    public Cares findByArrivalDate(LocalDate date) throws Exception {
         return reservations.stream()
                 .filter(r -> r.getArrival()
                 .equals(date))
@@ -78,7 +78,7 @@ public class FileCaresDao implements CaresDao {
     }
 
     @Override
-    public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) {
+    public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) throws Exception {
         
         if (reservations.isEmpty()) {
             return true;
