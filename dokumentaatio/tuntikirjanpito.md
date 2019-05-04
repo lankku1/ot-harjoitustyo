@@ -13,4 +13,6 @@
 | 16.4. |  4  | Korjattiin checkstyle.xml tiedostoa ja kirjoitusvirheitä. Muokattiin ui näkymää ja testiluokkia edellisen päivän muutosten pohjalta. |
 | 25.4 | 4 | Käyttöliittymän muokkaamista, mm. lisättiin toiminnallisuus varausten lisäämiselle käytteäen FileCaresDao-luokkaa. Virheiden korjailuja. DateCell ja DatePicker toiminnallisuuteen tutustumista|
 | 26.4 | 3 | Lisättiin getReservations-metodi käyttöliittymään ja JavaDocin-kuvauksien luonti sovelluksen luokille|
-|yhteensä| 33,5|
+| 3.5 | 4 | Korjattiin caresDao-luokan toimintaa vaatimusten mukaiseksi, jatkettiin testiluokkien tekemistä|
+| 4.5 | 1,5 | Testiluokkien tekemistä ja testausta. |
+|yhteensä| 39 |
