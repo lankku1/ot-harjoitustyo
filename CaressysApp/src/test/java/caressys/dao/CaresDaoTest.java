@@ -65,7 +65,7 @@ public class CaresDaoTest {
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertTrue(status);
+        assertFalse(status);
     }
     
     @Test
@@ -75,7 +75,7 @@ public class CaresDaoTest {
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertFalse(status);
+        assertTrue(status);
     }
     
     @Test
@@ -85,7 +85,7 @@ public class CaresDaoTest {
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertFalse(status);
+        assertTrue(status);
     }
     
     @Test
@@ -95,37 +95,37 @@ public class CaresDaoTest {
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertFalse(status);
+        assertTrue(status);
     }
     
     @Test
-    public void arrivaldateIsTheSameAsExistingDepartureReturnsTrue() throws Exception {
+    public void arrivaldateIsTheSameAsExistingDepartureReturnsFalse() throws Exception {
         LocalDate from = LocalDate.of(2019, Month.JUNE, 20);
         LocalDate to = LocalDate.of(2019, Month.JUNE, 23);
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertTrue(status);
+        assertFalse(status);
     }
     
     @Test
-    public void departuredateIsTheSameAsExistingArrivalReturnsTrue() throws Exception {
+    public void departuredateIsTheSameAsExistingArrivalReturnsFalse() throws Exception {
         LocalDate from = LocalDate.of(2019, Month.JUNE, 01);
         LocalDate to = LocalDate.of(2019, Month.JUNE, 04);
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertTrue(status);
+        assertFalse(status);
     }
     
     @Test
-    public void reservationWithTheSameDatesReturnsFalse() throws Exception {
+    public void reservationWithTheSameDatesReturnsTrue() throws Exception {
         LocalDate from = LocalDate.of(2019, Month.JUNE, 04);
         LocalDate to = LocalDate.of(2019, Month.JUNE, 07);
         
         boolean status = caresDao.datesGivenOverlapsWithExisting(from, to);
         
-        assertFalse(status);
+        assertTrue(status);
     }
     
     
