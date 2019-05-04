@@ -28,6 +28,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CaressysUi extends Application {
 
@@ -79,7 +81,11 @@ public class CaressysUi extends Application {
             String username = inputUsername.getText();
             menuLabel.setText("Welcome to CaressysApp " + username + "!");
             if (service.login(username)) {
-                getReservations();
+                try {
+                    getReservations();
+                } catch (Exception ex) {
+                    Logger.getLogger(CaressysUi.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 loginMessage.setText("");
                 primaryStage.setScene(userScene);
                 inputUsername.setText("");
@@ -207,18 +213,22 @@ public class CaressysUi extends Application {
         newReservationButton.setOnAction((event) -> {
             LocalDate arrival = insertArrivalDate.getValue();
             LocalDate departure = insertDepartureDate.getValue();
-            if (!(service.createReservation(arrival, departure))) {
-                createReservationInfo.setText("Reservation overlaps with an \n existing reservation");
-                createReservationInfo.setTextFill(Color.RED);
-                Cares res = service.getReservation(arrival);
-                setDatePickerView(insertArrivalDate, res);
-                setDatePickerView(insertDepartureDate, res);
-            } else {
-                createReservationInfo.setText("");
-                menuLabel.setText("New reservation created succesfully");
-                menuLabel.setTextFill(Color.GREEN);
-                getReservations(); // add the new reservation to the userScene
-                primaryStage.setScene(userScene);
+            try {
+                if (!(service.createReservation(arrival, departure))) {
+                    createReservationInfo.setText("Reservation overlaps with an \n existing reservation");
+                    createReservationInfo.setTextFill(Color.RED);
+                    //Cares res = service.getReservation(arrival);
+                    //setDatePickerView(insertArrivalDate, res);
+                    //setDatePickerView(insertDepartureDate, res);
+                } else {
+                    createReservationInfo.setText("");
+                    menuLabel.setText("New reservation created succesfully");
+                    menuLabel.setTextFill(Color.GREEN);
+                    getReservations(); // add the new reservation to the userScene
+                    primaryStage.setScene(userScene);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(CaressysUi.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -240,8 +250,9 @@ public class CaressysUi extends Application {
     /**
      * lists all the reservations to reservations pane that all of the users have made.
      * Method 
+     * @throws java.lang.Exception
      */
-    public void getReservations() {
+    public void getReservations() throws Exception {
         reservations.getChildren().clear();
         List<Cares> reservationlist = service.listAllReservations();
 
@@ -252,7 +263,7 @@ public class CaressysUi extends Application {
         }
 
     }
-    
+    /*
     public void setDatePickerView(DatePicker datePicker, Cares res) {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
@@ -272,7 +283,7 @@ public class CaressysUi extends Application {
         };
         datePicker.setDayCellFactory(dayCellFactory);
     }
-
+*/
     public static void main(String[] args) {
         launch(CaressysUi.class);
     }
