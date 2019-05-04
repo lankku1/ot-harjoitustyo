@@ -79,7 +79,7 @@ public class CaressysService {
      * @return true if the reservation has been created succesfully, otherwise it will return false (i.e., if the reservation overlaps an existing reservation).
      * 
      */
-    public boolean createReservation(LocalDate arrival, LocalDate departure) {
+    public boolean createReservation(LocalDate arrival, LocalDate departure) throws Exception {
         /*
         first check if there already exists a reservation between the duration given.
         if the method won't find a reservation, return true, otherwise return false.
@@ -106,7 +106,7 @@ public class CaressysService {
      * @return a list that contains all the existing reservations made
      */
     
-    public List<Cares> listAllReservations() {
+    public List<Cares> listAllReservations() throws Exception {
         
         if (loggedInUser == null) {
             return new ArrayList<>();
@@ -114,8 +114,6 @@ public class CaressysService {
 
         return caresDao.getAll()
                 .stream()
-                //.filter(t -> t.getArrival().isAfter(LocalDate.now())) // filtering all the previous reservations that aren't relevant anymore
-                //.filter(t -> t.getUser().equals(loggedInUser)) not relevant anymore
                 .collect(Collectors.toList());
     }
     
@@ -124,7 +122,7 @@ public class CaressysService {
      * @param arrival arrivaldate for the specific reservation
      * @return a specific reservation found by the given date, if there doesn't exist a reservation for the given date, return null
      */
-    public Cares getReservation(LocalDate arrival) {
+    public Cares getReservation(LocalDate arrival) throws Exception {
         return caresDao.findByArrivalDate(arrival);
     }
 }
