@@ -18,12 +18,12 @@ public class FakeCaresDao implements CaresDao {
     }
 
     @Override
-    public List<Cares> getAll() {
+    public List<Cares> getAll() throws Exception {
         return reservations;
     }
 
     @Override
-    public Cares findByArrivalDate(LocalDate date) {
+    public Cares findByArrivalDate(LocalDate date) throws Exception {
         return reservations.stream()
                 .filter(r -> r.getArrival()
                 .equals(date))
@@ -32,18 +32,23 @@ public class FakeCaresDao implements CaresDao {
     }
 
     @Override
-    public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) {
+    public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) throws Exception {
         if (reservations.isEmpty()) {
             return true;
         }
         
         for (Cares reservation : reservations) {
-            if (!(from.isAfter(reservation.getDeparture()) || to.isBefore(reservation.getArrival()))) {
-                if (! (from.equals(reservation.getArrival()) || to.equals(reservation.getDeparture()))) {
-                    return true;
-                }
+            LocalDate a = reservation.getArrival();
+            LocalDate d = reservation.getDeparture();
+            
+            if (from.equals(a) || to.equals(d)) {
+                return false;
+            } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
+                return false;
+            } else if (from.isBefore(a) && to.isAfter(a)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
