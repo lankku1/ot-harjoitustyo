@@ -89,19 +89,19 @@ public class FileCaresDao implements CaresDao {
             LocalDate d = reservation.getDeparture();
             
             if (from.equals(a) || to.equals(d)) {
-                return false;
+                return true;
             } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
-                return false;
+                return true;
             } else if (from.isBefore(a) && to.isAfter(a)) {
-                return false;
+                return true;
             }
         }
         /*
         if reservation ends before the existing reservation even starts, or if reservation starts after 
         the existing reservation ends, then it doesn't conflict with existing reservations
-         -> return true
+         -> return false
         */
         
-        return true;
+        return false;
     }
 }
