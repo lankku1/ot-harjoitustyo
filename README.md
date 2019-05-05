@@ -21,6 +21,9 @@ Sovelluksella on siis useampi rekisteröitynyt käyttäjä. Jokaisella käyttäj
 
 [Viikko 6](https://github.com/lankku1/ot-harjoitustyo/releases/tag/Viikko6)
 
+## Loppupalautus
+[Viikko 7](https://github.com/lankku1/ot-harjoitustyo/releases/tag/viikko7)
+
 ## Komentorivitoiminnot
 
 ### Testaus
