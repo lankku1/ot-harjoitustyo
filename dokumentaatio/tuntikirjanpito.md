@@ -14,5 +14,5 @@
 | 25.4 | 4 | Käyttöliittymän muokkaamista, mm. lisättiin toiminnallisuus varausten lisäämiselle käytteäen FileCaresDao-luokkaa. Virheiden korjailuja. DateCell ja DatePicker toiminnallisuuteen tutustumista|
 | 26.4 | 3 | Lisättiin getReservations-metodi käyttöliittymään ja JavaDocin-kuvauksien luonti sovelluksen luokille|
 | 3.5 | 4 | Korjattiin caresDao-luokan toimintaa vaatimusten mukaiseksi, jatkettiin testiluokkien tekemistä|
-| 4.5 | 1,5 | Testiluokkien tekemistä ja testausta. |
-|yhteensä| 39 |
+| 4.5 | 2,5 | Testiluokkien tekemistä ja testausta. Arkkitehtuuriin päätoiminnallisuuksien lisäys|
+|yhteensä| 40 |
