@@ -43,13 +43,13 @@ Sovellus tallettaa käyttäjät seuraavasti:
 testaaja;Maija
 muumi;Maikki
 </pre>
-, missä on ensin talletettu käyttäjänimi ja tämän jälkeen käyttäjän nimi.
+missä on ensin talletettu käyttäjänimi ja tämän jälkeen käyttäjän nimi.
 Käyttäjien tekemät varaukset taas talletetaan seuraavasti
 <pre>
 1;2019-05-07;2019-05-09;testaaja
 4;2019-09-10;2019-09-14;muumi
 </pre>
-, missä näkyy ensimmäisenä varauksen id eli tunniste, tästä seuraa tulo- ja lähtöpäivä sekä lopuksi varauksen tehneen käyttäjän käyttäjänimi.
+missä näkyy ensimmäisenä varauksen id eli tunniste, tästä seuraa tulo- ja lähtöpäivä sekä lopuksi varauksen tehneen käyttäjän käyttäjänimi.
 Molemmissa tiedostoissa kentät on erotettu puolipisteellä.
 
 ## Päätoiminnallisuudet
