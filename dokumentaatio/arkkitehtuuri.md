@@ -45,12 +45,18 @@ Kuvataan seuraavaksi sovelluksen toimintalogiikaa käyttäen muutaman päätoimi
 
 ### Uuden käyttäjän luominen
 
-Kun uuden käyttäjän luomisnäkymässä on syötetty käyttäjätunnus joka ei ole jo käytössä sekä nimi ja klikataan painiketta createUser etenee sovelluksen kontrolli seuraavasti:
+Kun uuden käyttäjän luomisnäkymässä on syötetty käyttäjätunnus, joka ei ole jo käytössä, sekä nimi ja klikataan painiketta create user etenee sovelluksen kontrolli seuraavasti:
 
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/newUser.png">
 
 ### Käyttäjän sisäänkirjautuminen
+
+Kun käyttäjä on luotu, voidaan sisäänkirjautua sovellukseen käyttämällä luodun profiilin käyttäjänimeä. Mikäli käyttäjänimi on olemassa, voidaan siirtyä käyttäjänäkymään klikkaamalla painiketta login, jonka näkymää varten tulostetaan vielä olemassa olevat varaukset.
+
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/userLogin.png">
 
 ### Uuden varauksen luonti
+
+Uutta varausta varten sisäänkirjautuneen käyttäjän tulee syöttää näkymälle halutun ajankohdan tulo- ja lähtöpäivä. Klikattuaan painiketta newReservation, sovellus varmistaa, että kyseinen ajankohta ei luo päällekkäisyyksiä muiden varausten kanssa (tässä kaaviossa ei ole tehty vielä muita varauksia). Mikäli ei tule päällekkäisyyksiä, luodaan kyseinen varaus käyttäjälle, oikealla tunnuksella ja tallennetaan tämä tiedostoon. Lopuksi, mikäli varaus luotiin onnistuneesti, sovellus siirtyy takaisin käyttäjän etusivulle, missä uusi varaus on jo näkyvillä.
+
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/createNewReservation.png">
