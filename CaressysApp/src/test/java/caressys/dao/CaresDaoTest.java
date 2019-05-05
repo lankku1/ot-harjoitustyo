@@ -59,6 +59,25 @@ public class CaresDaoTest {
     }
     
     @Test
+    public void correctReservationFoundWithArrivalDate() throws Exception {
+        LocalDate date = LocalDate.of(2019, Month.JULY, 02);
+        Cares res = caresDao.findByArrivalDate(date);
+        
+        assertEquals(2, res.getId());
+        assertEquals(LocalDate.of(2019, Month.JULY, 02), res.getArrival());
+        assertEquals(LocalDate.of(2019, Month.JULY, 20), res.getDeparture());
+        assertEquals("muumi", res.getUser().getUsername());
+    }
+    
+    @Test
+    public void returnsNullWhenFindingWithWrongDate() throws Exception {
+        LocalDate date = LocalDate.of(2019, Month.JUNE, 01);
+        Cares res = caresDao.findByArrivalDate(date);
+        
+        assertEquals(null, res);
+    }
+    
+    @Test
     public void newReservationIsNotOverlappingWithOthers() throws Exception {
         LocalDate from = LocalDate.of(2019, Month.JUNE, 10);
         LocalDate to = LocalDate.of(2019, Month.JUNE, 15);
