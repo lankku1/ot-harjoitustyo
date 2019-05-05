@@ -98,11 +98,9 @@ public class CaressysService {
         }
         return true;
     }
-    
-    
 
     /**
-     * used for listing all the reservation made (for a specific user)
+     * used for listing all the reservation made
      * @return a list that contains all the existing reservations made
      */
     
