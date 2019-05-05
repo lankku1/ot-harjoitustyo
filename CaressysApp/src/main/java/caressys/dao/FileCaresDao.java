@@ -76,18 +76,23 @@ public class FileCaresDao implements CaresDao {
                 .findFirst()
                 .orElse(null);
     }
-
+    
+    /**
+     * for checking if given dates overlap with an existing reservation
+     * @param from arrivaldate for the new reservation
+     * @param to departuredate for the new reservation
+     * @return if reservation ends before the existing reservation even starts, or if reservation starts after 
+        the existing reservation ends, then it doesn't conflict with existing reservations -> return false. If it conflicts return true.
+     * @throws Exception 
+     */
     @Override
     public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) throws Exception {
-        
         if (reservations.isEmpty()) {
             return true;
         }
-        
         for (Cares reservation : reservations) {
             LocalDate a = reservation.getArrival();
             LocalDate d = reservation.getDeparture();
-            
             if (from.equals(a) || to.equals(d)) {
                 return true;
             } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
@@ -96,12 +101,6 @@ public class FileCaresDao implements CaresDao {
                 return true;
             }
         }
-        /*
-        if reservation ends before the existing reservation even starts, or if reservation starts after 
-        the existing reservation ends, then it doesn't conflict with existing reservations
-         -> return false
-        */
-        
         return false;
     }
 }
