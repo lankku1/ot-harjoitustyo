@@ -48,6 +48,7 @@ public class FileCaresDao implements CaresDao {
     private int generateId() throws Exception {
         return reservations.size() + 1;
     }
+    
     /**
      * create a new calendar reservation and adding it to the
      * reservations list and saving it to the file that consists of all the reservations created
@@ -102,5 +103,11 @@ public class FileCaresDao implements CaresDao {
             }
         }
         return false;
+    }
+
+    @Override
+    public void deleteReservation(Cares r) throws Exception {
+        reservations.remove(r);
+        save();
     }
 }

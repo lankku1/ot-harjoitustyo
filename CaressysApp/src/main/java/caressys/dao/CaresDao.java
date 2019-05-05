@@ -14,4 +14,6 @@ public interface CaresDao {
     Cares findByArrivalDate(LocalDate date) throws Exception;
     
     boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) throws Exception;
+    
+    void deleteReservation(Cares r) throws Exception;
 }
