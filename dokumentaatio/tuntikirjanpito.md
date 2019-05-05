@@ -15,4 +15,5 @@
 | 26.4 | 3 | Lisättiin getReservations-metodi käyttöliittymään ja JavaDocin-kuvauksien luonti sovelluksen luokille|
 | 3.5 | 4 | Korjattiin caresDao-luokan toimintaa vaatimusten mukaiseksi, jatkettiin testiluokkien tekemistä|
 | 4.5 | 2,5 | Testiluokkien tekemistä ja testausta. Arkkitehtuuriin päätoiminnallisuuksien lisäys|
-|yhteensä| 40 |
+| 5.5 | 7 | Ylläpitäjän näkymä luotu ja tähän liittyvät toiminnallisuudet sekä testaukset. Pieniä virheitä sovelluksen toiminnassa korjattu. Dokumenttien viimeistely |
+|yhteensä| 47 |
