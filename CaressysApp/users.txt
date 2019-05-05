@@ -2,3 +2,5 @@ anlaine;Anna
 testaaja;Maija
 Mansikka;Maisa
 Pontso;Maikki
+testeri;Maikki
+admin;
