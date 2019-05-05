@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto caressysapp.jar.
+Lataa tiedosto [caressysapp.jar](https://github.com/lankku1/ot-harjoitustyo/releases/tag/viikko7).
 
 ## Konfigurointi
 
