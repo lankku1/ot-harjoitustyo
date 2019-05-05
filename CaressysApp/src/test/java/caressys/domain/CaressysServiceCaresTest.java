@@ -52,11 +52,21 @@ public class CaressysServiceCaresTest {
         assertEquals(LocalDate.of(2019, Month.JUNE, 12), res.getDeparture());
         assertEquals("testeri1", res.getUser().getUsername());
     }
+    
+    @Test
+    public void newReservationAddedSuccesfully() throws Exception {
+        boolean status = service.createReservation(LocalDate.of(2019, Month.JUNE, 20), LocalDate.of(2019, Month.JUNE, 26));
+        assertTrue(status);
+    }
      
     @Test
-    public void createNewReservationSuccesfully() throws Exception {
-        
+    public void creatingNewReservationFailsWithoutLoggedInUser() throws Exception {
+        service.logout();
+        boolean status = service.createReservation(LocalDate.of(2019, Month.JUNE, 15), LocalDate.of(2019, Month.JUNE, 16));
+        assertFalse(status);
     }
+    
+    
     
     @Test
     public void correctReservationFoundWithRightArrival() throws Exception {
