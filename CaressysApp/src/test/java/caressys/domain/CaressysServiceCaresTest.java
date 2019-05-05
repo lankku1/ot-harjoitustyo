@@ -57,6 +57,20 @@ public class CaressysServiceCaresTest {
         assertFalse(status);
     }
     
-    //@Test
-    //public void
+    @Test
+    public void reservationDeletedSuccesfully() throws Exception {
+        Cares res = service.getReservation(LocalDate.of(2019, Month.JUNE, 15));
+        boolean status = service.deleteWantedReservation(res);
+        
+        assertTrue(status);
+    }
+    
+    @Test
+    public void deletingNotExistingReservationFails() throws Exception {
+        Cares res = new Cares(0, LocalDate.of(2019, Month.JUNE, 23), LocalDate.of(2019, Month.JUNE, 27), null);
+        boolean status = service.deleteWantedReservation(res);
+        
+        assertFalse(status);
+    }
+    
 }
