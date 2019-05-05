@@ -14,6 +14,8 @@ Sovelluksella on siis useampi rekisteröitynyt käyttäjä. Jokaisella käyttäj
 
 [Käyttöohje](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/testausdokumentti.md)
+
 ## Pre-releaset
 [Viikko 5](https://github.com/lankku1/ot-harjoitustyo/releases/tag/Viikko5)
 
