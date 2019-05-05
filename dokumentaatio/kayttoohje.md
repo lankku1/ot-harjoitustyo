@@ -1,4 +1,23 @@
 # Käyttöohje
+
+Lataa tiedosto caressysapp.jar.
+
+## Konfigurointi
+
+Ohjelma olettaa, että sen käynnistyshakemistossa on konfiguraatiotiedosto _config.properties_, joka määrittelee käyttäjät ja todot tallettavien tiedostojen nimet. Tiedoston muoto on seuraava
+
+```
+userFile=users.txt
+resFile=reservations.txt
+```
+
+## Ohjelman käynnistäminen
+
+Ohjelma käynnistetään komennolla 
+
+```
+java -jar caressysapp.jar
+```
 ## Kirjautuminen
 Sovellus käynnistyy kirjautumisnäkymään:
 
