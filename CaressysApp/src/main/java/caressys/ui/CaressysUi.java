@@ -3,7 +3,6 @@ package caressys.ui;
 import caressys.dao.FileCaresDao;
 import caressys.dao.FileUserDao;
 import caressys.domain.Cares;
-import caressys.domain.User;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
@@ -11,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,15 +19,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.util.Properties;
-import javafx.geometry.Pos;
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Node;
+import javafx.scene.control.PasswordField;
 
 public class CaressysUi extends Application {
 
@@ -38,10 +34,12 @@ public class CaressysUi extends Application {
     private Scene newUserScene; // for creating a new user
     private Scene userScene; // the first scene after logging in
     private Scene newReservationScene; // for creating a new reservation
+    private Scene adminScene; // for admin to delete reservations created
 
     private CaressysService service;
     private Label menuLabel = new Label();
-    private VBox reservations = new VBox(10);
+    private VBox reservations;
+    private VBox resForAdmin;
     
     @Override
     public void init() throws Exception {
@@ -57,6 +55,9 @@ public class CaressysUi extends Application {
         FileUserDao userDao = new FileUserDao(userFile);
         FileCaresDao caresDao = new FileCaresDao(resFile, userDao);
         service = new CaressysService(userDao, caresDao);
+        reservations = new VBox(10);
+        resForAdmin = new VBox(10);
+        service.createUser("admin", "");
     }
 
     @Override
@@ -69,12 +70,17 @@ public class CaressysUi extends Application {
 
         Label loginLabel = new Label("Username:");
         TextField inputUsername = new TextField();
-        loginPane.getChildren().addAll(loginLabel, inputUsername);
+        //loginPane.getChildren().addAll(loginLabel, inputUsername);
         Label loginMessage = new Label(); // if the username input doesn't exist yet
+        
+        Label adminLabel = new Label("Admin password:");
+        PasswordField adminInput = new PasswordField();
+        Label adminMessage = new Label(); // if the password for admin is incorrect
 
         // let's create the buttons
         Button loginButton = new Button("Log in");
         Button createButton = new Button("Create new user");
+        Button adminButton = new Button("Log in as admin");
 
         // set this action, when pressing the "Log in"-button
         loginButton.setOnAction((event) -> {
@@ -94,6 +100,25 @@ public class CaressysUi extends Application {
                 loginMessage.setTextFill(Color.RED);
             }
         });
+        
+        // set this action, when pressing the "log in as admin"-button
+        adminButton.setOnAction((event) -> {
+            String password = adminInput.getText();
+            if (password.equals("admin")) {
+                service.login("admin");
+                adminMessage.setText("");
+                loginMessage.setText("");
+                try {
+                    getReservationsForAdmin();
+                } catch (Exception ex) {
+                    Logger.getLogger(CaressysUi.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                primaryStage.setScene(adminScene);
+            } else {
+                adminMessage.setText("Incorrect password");
+                adminMessage.setTextFill(Color.RED);
+            }
+        });
 
         // set this action, when pressing the "create new user"-button
         createButton.setOnAction((event) -> {
@@ -101,9 +126,9 @@ public class CaressysUi extends Application {
             primaryStage.setScene(newUserScene);
         });
 
-        loginPane.getChildren().addAll(loginMessage, loginButton, createButton);
+        loginPane.getChildren().addAll(loginLabel, inputUsername, loginMessage, loginButton, adminLabel, adminInput, adminMessage, adminButton, createButton);
 
-        loginScene = new Scene(loginPane, 300, 250);
+        loginScene = new Scene(loginPane, 300, 300);
         primaryStage.setScene(loginScene);
 
         // set the createNewUserScene
@@ -142,6 +167,7 @@ public class CaressysUi extends Application {
                 userCreationMessage.setText("");
                 loginMessage.setText("New user created");
                 loginMessage.setTextFill(Color.GREEN);
+                adminMessage.setText("");
                 primaryStage.setScene(loginScene);
                 newNameInput.clear();
                 newUsernameInput.clear();
@@ -152,6 +178,26 @@ public class CaressysUi extends Application {
         });
         newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, characterInfo, createNewUserButton);
         newUserScene = new Scene(newUserPane, 300, 250);
+        
+        // set the admin scene
+        BorderPane adminPane = new BorderPane();
+        adminPane.setPadding(new Insets(10));
+        VBox leftSideAdminPane = new VBox(10);
+        leftSideAdminPane.setPadding(new Insets(10));
+        Label adminIntroText = new Label("Welcome admin! Here you can delete any reservation made.");
+        Button returnToLoginButton = new Button("Return");
+        
+        returnToLoginButton.setOnAction((event) -> {
+            adminInput.clear();
+            service.logout();
+            primaryStage.setScene(loginScene);
+        });
+        
+        leftSideAdminPane.getChildren().addAll(adminIntroText, resForAdmin);
+        adminPane.setLeft(leftSideAdminPane);
+        adminPane.setRight(returnToLoginButton);
+        
+        adminScene = new Scene(adminPane, 500, 300);
 
         // set the user scene when the user has succesfully logged in
         BorderPane userPane = new BorderPane();
@@ -217,9 +263,9 @@ public class CaressysUi extends Application {
                 if (!(service.createReservation(arrival, departure))) {
                     createReservationInfo.setText("Reservation overlaps with an \n existing reservation");
                     createReservationInfo.setTextFill(Color.RED);
-                    //Cares res = service.getReservation(arrival);
-                    //setDatePickerView(insertArrivalDate, res);
-                    //setDatePickerView(insertDepartureDate, res);
+                } else if (departure.isBefore(arrival)) {
+                    createReservationInfo.setText("Make sure that departure is after arrival!");
+                    createReservationInfo.setTextFill(Color.RED);
                 } else {
                     createReservationInfo.setText("");
                     menuLabel.setText("New reservation created succesfully");
@@ -252,7 +298,7 @@ public class CaressysUi extends Application {
      * Method 
      * @throws java.lang.Exception
      */
-    public void getReservations() throws Exception {
+    private void getReservations() throws Exception {
         reservations.getChildren().clear();
         List<Cares> reservationlist = service.listAllReservations();
 
@@ -261,29 +307,36 @@ public class CaressysUi extends Application {
                 reservations.getChildren().add(new Label(res.toString()));
             });
         }
+    }
+    
+    public void getReservationsForAdmin() throws Exception {
+        resForAdmin.getChildren().clear();
+        List<Cares> reservationlist = service.listAllReservations();
 
+        if (!reservationlist.isEmpty()) {
+            reservationlist.forEach((res) -> {
+                resForAdmin.getChildren().add(createReservationNode(res));
+            });
+        }
     }
-    /*
-    public void setDatePickerView(DatePicker datePicker, Cares res) {
-        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
-            @Override
-            public DateCell call(final DatePicker datePicker) {
-                return new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item.isAfter(res.getArrival()) && item.isBefore(res.getDeparture())) {
-                            setDisable(true);
-                            setTooltip(new Tooltip(service.getLoggedInUser().getUsername()));
-                            setStyle("-fx-background-color: #ffc0cb;");
-                        }
-                    }
-                };
+    
+    public Node createReservationNode(Cares r) {
+        HBox reservationPane = new HBox(10);
+        Label reservationInfoLabel = new Label(r.toString());
+        Button deleteButton = new Button("Delete");
+        
+        deleteButton.setOnAction((event) -> {
+            try {
+                service.deleteWantedReservation(r);
+                getReservationsForAdmin();
+            } catch (Exception ex) {
+                Logger.getLogger(CaressysUi.class.getName()).log(Level.SEVERE, null, ex);
             }
-        };
-        datePicker.setDayCellFactory(dayCellFactory);
+        });
+        reservationPane.getChildren().addAll(reservationInfoLabel, deleteButton);
+        return reservationPane;
     }
-*/
+    
     public static void main(String[] args) {
         launch(CaressysUi.class);
     }
