@@ -271,6 +271,7 @@ public class CaressysUi extends Application {
                     menuLabel.setText("New reservation created succesfully");
                     menuLabel.setTextFill(Color.GREEN);
                     getReservations(); // add the new reservation to the userScene
+                    createReservationInfo.setText("");
                     primaryStage.setScene(userScene);
                 }
             } catch (Exception ex) {
@@ -281,6 +282,7 @@ public class CaressysUi extends Application {
         Button returnToCalendarButton = new Button("Return");
         returnToCalendarButton.setPadding(new Insets(5));
         returnToCalendarButton.setOnAction((event) -> {
+            createReservationInfo.setText("");
             primaryStage.setScene(userScene);
         });
 

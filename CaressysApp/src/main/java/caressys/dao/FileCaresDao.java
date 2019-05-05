@@ -89,19 +89,16 @@ public class FileCaresDao implements CaresDao {
     @Override
     public boolean datesGivenOverlapsWithExisting(LocalDate from, LocalDate to) throws Exception {
         if (reservations.isEmpty()) {
-            return true;
+            return false;
         }
         for (Cares reservation : reservations) {
             LocalDate a = reservation.getArrival();
             LocalDate d = reservation.getDeparture();
             if (from.equals(a) || to.equals(d)) {
-                System.out.println("eka ehto");
                 return true;
             } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
-                System.out.println("toka ehto");
                 return true;
             } else if (from.isBefore(a) && to.isAfter(a)) {
-                System.out.println("kolmas ehto");
                 return true;
             }
         }

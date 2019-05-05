@@ -85,7 +85,7 @@ public class CaressysService {
         if the method won't find a reservation, return true, otherwise return false.
          */
         boolean status = caresDao.datesGivenOverlapsWithExisting(arrival, departure);
-        if (!status) {
+        if (status) {
             return false;
         }
         Cares reservation = new Cares(0, arrival, departure, loggedInUser);

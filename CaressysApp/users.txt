@@ -4,3 +4,4 @@ Mansikka;Maisa
 Pontso;Maikki
 testeri;Maikki
 admin;
+muumi;Anna
