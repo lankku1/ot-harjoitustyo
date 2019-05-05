@@ -1,22 +1,12 @@
 
 package caressys.domain;
 
-import caressys.dao.CaresDao;
-import caressys.dao.FileCaresDao;
-import caressys.dao.UserDao;
-import java.io.File;
-import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Rule;
-import org.junit.rules.TemporaryFolder;
 
 public class CaressysServiceCaresTest {
     
@@ -53,6 +43,7 @@ public class CaressysServiceCaresTest {
         assertEquals("testeri1", res.getUser().getUsername());
     }
     
+    
     @Test
     public void newReservationAddedSuccesfully() throws Exception {
         boolean status = service.createReservation(LocalDate.of(2019, Month.JUNE, 20), LocalDate.of(2019, Month.JUNE, 26));
@@ -66,13 +57,6 @@ public class CaressysServiceCaresTest {
         assertFalse(status);
     }
     
-    
-    
-    @Test
-    public void correctReservationFoundWithRightArrival() throws Exception {
-        
-        
-    }
     //@Test
     //public void
 }

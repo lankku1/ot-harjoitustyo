@@ -36,11 +36,9 @@ public class FakeCaresDao implements CaresDao {
         if (reservations.isEmpty()) {
             return true;
         }
-        
         for (Cares reservation : reservations) {
             LocalDate a = reservation.getArrival();
             LocalDate d = reservation.getDeparture();
-            
             if (from.equals(a) || to.equals(d)) {
                 return true;
             } else if (from.isAfter(a) && (from.isBefore(d) || to.isBefore(d))) {
@@ -50,5 +48,10 @@ public class FakeCaresDao implements CaresDao {
             }
         }
         return false;
+    }
+
+    @Override
+    public void deleteReservation(Cares r) throws Exception {
+        reservations.remove(r);
     }
 }
