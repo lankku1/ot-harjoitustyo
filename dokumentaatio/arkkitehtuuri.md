@@ -32,7 +32,7 @@ CaressysServicen ja ohjelman muiden osien suhdetta kuvaava pakkauskaavio (kaavio
 <img src= "https://github.com/lankku1/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/pakkauskaavioSovelluksesta.png">
 
 ## Tietojen pysyväistallennus
-Pakkauksen caressys.dao luokkien _FileUserDao_ ja _FileCaresDao_ tarkoituksena on tallettaa tiedot luotihin tiedostoihin. _FileUserDao_ tallettaa tiedot käyttäjistä _users.txt_ tiedostoon ja _FileCaresDao_ tallettaa tiedot varauksista _reservations.txt_ tiedostoon. Luokat noudattavat Data Access Object -suunnittelumallia ja ne on luoto rajapintojen _UserDao_ ja _CaresDao_ taakse.
+Pakkauksen caressys.dao luokkien _FileUserDao_ ja _FileCaresDao_ tarkoituksena on tallettaa tiedot luotuihin tiedostoihin. _FileUserDao_ tallettaa tiedot käyttäjistä _users.txt_ tiedostoon ja _FileCaresDao_ tallettaa tiedot varauksista _reservations.txt_ tiedostoon. Luokat noudattavat Data Access Object -suunnittelumallia ja ne on luoto rajapintojen _UserDao_ ja _CaresDao_ taakse.
 
 ## Tiedostot
 Kuten jo teitojen pysyväistallennuksessa avattiin, nii sovellus tallettaa käyttäjän tiedot, sekä käyttäjien luomat varaukset erillisiin tiedostoihin.
