@@ -85,11 +85,9 @@ public class CaressysService {
         if the method won't find a reservation, return true, otherwise return false.
          */
         boolean status = caresDao.datesGivenOverlapsWithExisting(arrival, departure);
-        
         if (status) {
             return false;
         }
-        
         Cares reservation = new Cares(0, arrival, departure, loggedInUser);
         try {
             caresDao.create(reservation);
@@ -113,6 +111,14 @@ public class CaressysService {
         return caresDao.getAll()
                 .stream()
                 .collect(Collectors.toList());
+    }
+    
+    public boolean deleteWantedReservation(Cares res) throws Exception {
+        if (caresDao.findByArrivalDate(res.getArrival()) == null) {
+            return false;
+        }
+        caresDao.deleteReservation(res);
+        return true;
     }
     
     /**
