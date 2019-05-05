@@ -35,9 +35,22 @@ CaressysServicen ja ohjelman muiden osien suhdetta kuvaava pakkauskaavio (kaavio
 Pakkauksen caressys.dao luokkien _FileUserDao_ ja _FileCaresDao_ tarkoituksena on tallettaa tiedot luotuihin tiedostoihin. _FileUserDao_ tallettaa tiedot käyttäjistä _users.txt_ tiedostoon ja _FileCaresDao_ tallettaa tiedot varauksista _reservations.txt_ tiedostoon. Luokat noudattavat Data Access Object -suunnittelumallia ja ne on luoto rajapintojen _UserDao_ ja _CaresDao_ taakse.
 
 ## Tiedostot
-Kuten jo teitojen pysyväistallennuksessa avattiin, nii sovellus tallettaa käyttäjän tiedot, sekä käyttäjien luomat varaukset erillisiin tiedostoihin.
+Kuten jo tietojen pysyväistallennuksessa avattiin, niin sovellus tallettaa käyttäjän tiedot, sekä käyttäjien luomat varaukset erillisiin tiedostoihin.
 
 Sovelluksen juureen on sijoitettu konfiguraatiotiedosto config.properties, joka määrittelee tiedostojen nimet.
+Sovellus tallettaa käyttäjät seuraavasti:
+<pre>
+testaaja;Maija
+muumi;Maikki
+</pre>
+, missä on ensin talletettu käyttäjänimi ja tämän jälkeen käyttäjän nimi.
+Käyttäjien tekemät varaukset taas talletetaan seuraavasti
+<pre>
+1;2019-05-07;2019-05-09;testaaja
+4;2019-09-10;2019-09-14;muumi
+</pre>
+, missä näkyy ensimmäisenä varauksen id eli tunniste, tästä seuraa tulo- ja lähtöpäivä sekä lopuksi varauksen tehneen käyttäjän käyttäjänimi.
+Molemmissa tiedostoissa kentät on erotettu puolipisteellä.
 
 ## Päätoiminnallisuudet
 
