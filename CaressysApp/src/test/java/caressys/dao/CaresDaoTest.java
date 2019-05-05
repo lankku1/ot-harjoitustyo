@@ -147,9 +147,4 @@ public class CaresDaoTest {
         assertTrue(status);
     }
     
-    @Test
-    public void reservationDeletedSuccesfully() throws Exception {
-        
-    }
-    
 }
